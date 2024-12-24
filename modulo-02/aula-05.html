@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Condições</title>
+</head>
+<body>
+    <h1>Trabalhando com Funções em Javascript</h1>
+    <h2>Exemplos de criar e usar funções</h2>
+    <table>
+        <ul>
+            <li>Funções são blocos de código que podem ser chamados e reutilizados</li>
+            <li>Funções podem receber parâmetros</li>
+            <li>Funções podem retornar valores</li>
+            <li>Funções podem ser anônimas</li>
+            <li>Funções podem ser armazenadas em variáveis</li>
+            <li>Funções podem ser armazenadas em arrays</li>
+            <li>Funções podem ser armazenadas em objetos</li>
+            <li>Funções podem ser armazenadas em outras funções</li>
+        </ul>
+    
+    <script>       
+
+        // exemplos de funções
+        function teste() {
+            console.log('Função teste');
+        }    
+        teste(); // chama a função teste
+
+        // função com parâmetros
+        function soma(a, b) {
+            return a + b;
+        }
+        console.log(soma(10, 5)); // chama a função soma
+        
+
+        function pegarNomenome() {
+            return 'Gustavo';
+        }
+
+        var nome = pegarNomenome();
+        console.log(nome);
+
+        // função anônima
+        var teste = function() {
+            console.log('Função anônima');
+            alert('Função anônima');
+        }
+        // função armazenada em variável
+        teste();
+
+        // Função sem nome e chamada imediata
+        // IIFE (Immediately Invoked Function Expression)
+        (function() {
+            console.log('Função sem nome e chamada imediata');
+        })();
+
+        // Exmemplo prático do uso da IIFE
+        var contador = (function() {
+            var count = 0; // Variável privada
+            return function() {
+                count++;
+                console.log(count);
+            };
+        })();
+
+        contador(); // 1
+        contador(); // 2
+        contador(); // 3
+        contador(); // 4
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Condições</title>
+</head>
+<body>
+    <h1>Trabalhando com Condições</h1>
+    <h2>Alguns tipos de condições que encontramos:</h2>
+    <table>
+        <ul>
+            <li>if - se</li>
+            <li>else - senão</li>
+            <li>else if - senão se</li>
+            <li>switch - selecionar</li>
+        </ul>
+    </table>
+    
+    <script>
+
+        var nome = 'Gustavo';
+        var idade = 25;
+        
+        // conceito simpls de if e else
+        if (idade >= 18) {
+            console.log(nome + ' é maior de idade.');
+        } else {
+            console.log(nome + ' é menor de idade.');
+        }
+
+        // Uso aprimorado do if e else - Expressão "ternário"
+        idade >= 18 ? console.log(nome + ' é maior de idade.') : console.log(nome + ' é menor de idade.');
+
+        // conceito de else if
+        if (idade >= 18) {
+            console.log(nome + ' é maior de idade.');
+        } else if (idade == 17) {
+            console.log(nome + ' está quase lá.');
+        } else {
+            console.log(nome + ' é menor de idade.');
+        }
+
+        // if e else usando <> e != (diferente) ou 
+        // === e !== (estritamente igual)
+        // condição ou (||) e condição e (&&) 
+        // (||) - ou - se uma das condições for verdadeira
+        // (&&) - e - se todas as condições forem verdadeiras
+        
+        var sexo = 'M';
+        var idade = 25;
+        if (sexo === 'M' && idade >= 18) {
+            console.log('Homem maior de idade');
+        } else {
+            console.log('Homem menor de idade');
+        }
+
+        if (sexo === 'F' || idade >= 18) {
+            console.log('Mulher maior de idade');
+        } else {
+            console.log('Mulher menor de idade');
+        }
+
+        // diferente
+        if (sexo !== 'F') {
+            console.log('Homem');
+        } else {
+            console.log('Mulher');
+        }
+
+
+        // conceito de switch
+        // var dia = 1;
+        var dia = new Date().getDay(); // Retorna o dia da semana (de 0-6 - é mais prático e infalível em tempo real)
+        switch (dia) {
+            case 1:
+                console.log('Domingo');
+                break;
+            case 2:
+                console.log('Segunda-feira');
+                break;
+            case 3:
+                console.log('Terça-feira');
+                break;
+            case 4:
+                console.log('Quarta-feira');
+                break;
+            case 5:
+                console.log('Quinta-feira');
+                break;
+            case 6:
+                console.log('Sexta-feira');
+                break;
+            case 7:
+                console.log('Sábado');
+                break;
+            default:
+                console.log('Dia inválido');
+                break;
+        }
+
+        // Trabalhando com data 
+        var dataAtual = new Date();
+
+        var dia = dataAtual.getDate();
+        console.log(dia);
+
+        var mes = dataAtual.getMonth() + 1; // Os meses são indexados a partir de 0
+        console.log(mes);
+
+        var ano = dataAtual.getFullYear();
+        console.log(ano);
+
+        var horas = dataAtual.getHours();
+        console.log(horas);
+
+        var minutos = dataAtual.getMinutes();
+        console.log(minutos);
+
+        var segundos = dataAtual.getSeconds();
+        console.log(segundos);
+
+        var dataHoraFormatada = dia + '/' + mes + '/' + ano + ' ' + horas + ':' + minutos + ':' + segundos;
+        console.log(dataHoraFormatada);
+        document.write(dataHoraFormatada);
+
+        // Encontrar o dia da semana
+        var diasDaSemana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+        var diaSemana = dataAtual.getDay();
+        console.log(diasDaSemana[diaSemana]);
+        document.write('Hoje é: ' + diasDaSemana[diaSemana]);
+
+        var diaAleatorio = new Date('2024-12-25');
+        console.log(diaAleatorio.getDay());
+        console.log(diasDaSemana[diaAleatorio.getDay()]);
+
+    </script>
+</body>
+</html>
