@@ -23,3 +23,9 @@
 # git checkout <nome-da-branch>         -> Trocar para uma branch existente
 
 # git merge <nome-da-branch>            -> Mesclar uma branch com a branch atual
+
+# Configurar usuário do github para gerenciar o repositório:
+# git config --global user.email "exemplo@email.com"
+# git config --global user.name "Gustavo Teixeira"
+
+# Exemplo
