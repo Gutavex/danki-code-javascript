@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays</title>
+</head>
+<body>
+    <h1>Trabalhando com Arrays</h1>
+    <h2>Arryas possuem características específicas de lista</h2>
+    <h2>Arryas também possuem seus métodos específicos para manipulá-los</h2>
+    <h3>Site: <a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array">MDN: Array Definition</a></h3>
+    
+    <p>
+        tabela de exemplos de arrays
+        <table>
+            <ul>
+                <li>array - lista de valores</li>
+                <li>entries - posição do valor no array</li>
+                <li>every - testa os elementos do array</li>
+                <li>push - adicionar valor no array</li>
+                <li>pop - remover valor no array</li>
+                <li>length - tamanho do array</li>
+                <li>reverse - inverter a ordem do array</li>
+                <li>join - juntar valores do array</li>
+                <li>*split - separar valores do array - <b style="color: crimson;">é um método string e não do array</b></li>
+                <li>splice - remover valores do array</li>
+                <li>slice - copiar valores do array</li>
+                <li>filter - cria um novo array com todos os elementos que passaram no teste</li>
+                <li>concat - concatenar arrays</li>
+            </ul>
+        </table>
+    </p>
+
+    <script>
+        //  exemplos de arrays  
+        
+        //  at - retorna o índice do valor no array
+        //  entries - posição do valor no array
+        //  every - testa os elementos do array
+        //  push - adicionar valor no array
+        //  pop - remover valor no array
+        //  length - tamanho do array
+        //  reverse - inverter a ordem do array
+        //  join - juntar valores do array
+        //  split - separar valores do array***
+        //  splice - remover valores do array
+        //  slice - copiar valores do array
+        //  concat - concatenar arrays
+
+        var lista = ['Gustavo', 'João', 'Maria', 'José', 'Pedro', 'Ana', 'Paula', 'Carlos', 'Lucas', 'Fernanda'];
+        console.log(lista);
+        
+        /*
+            O método at() recebe um valor inteiro e retorna o item referente ao index dele, 
+            permitindo valores positivos ou negativos. 
+            Valores negativos contam apartir do último item do array.
+        */ 
+        
+        // A função que retorna o  primeiro item do array
+        console.log("Resultado: " + lista.at())
+
+        // A função que retorna o último item do array passado como argumento
+        console.log("Resultado: " + lista.at(-1))
+
+        // A função que retorna o último item do array passado como argumento
+        const cart = ["apple", "banana", "pear"];
+        function returnLast(arr) {
+            return arr.at(-1);
+        }
+
+        // Pega o último item do array 'cart'
+        const item1 = returnLast(cart);
+        console.log(item1); // 'pear'
+        
+        console.log(lista[0]); // Vai exibir o primeiro item da lista => Gustavo
+
+        /*  entries() - 
+            O método entries() retorna um novo objeto Array Iterator 
+            que contém os pares chave/valor para cada índice no array.
+        */ 
+        // usando método entries() no array
+        var iterator = lista.entries();
+        console.log(iterator.next().value); // [0, "Gustavo"]
+        console.log(iterator.next().value); // [1, "João"]
+        console.log(iterator.next().value); // [2, "Maria"]
+        // Pode ser um ótimo método para iterar sobre um array e jogar para um objeto (como o Map) ou para um array (como o Array.from).
+        var arr = ["a", "b", "c"];
+        var eArr = arr.entries();
+
+        for (let e of eArr) {
+            console.log(e);
+        }
+        // [0, 'a']
+        // [1, 'b']
+        // [2, 'c']
+
+        // fazendo o loop na lista
+        for (let e of lista.entries()) {
+            console.log(e);
+        }
+
+        // Teste com "every" de múltiplas formas
+        // O método every() testa se todos os elementos no array passam pelo teste implementado pela função fornecida.
+        // Retorna um valor booleano.
+        // Se todos os elementos passarem, ele retorna true. Caso contrário, ele retorna false.
+        // O método every() executa a função uma vez para cada elemento presente no array:
+        // Se encontrar um elemento de array onde a função retornar um valor falso, every() retorna false imediatamente.
+        
+        const isBelowThreshold = (currentValue) => currentValue < 40;
+        const array1 = [1, 30, 39, 29, 10, 13];
+        console.log(array1.every(isBelowThreshold)); // Expected output: true
+        
+
+        lista.push('Melissa'); // Adiciona um novo item no final da lista
+        console.log(lista);
+
+        console.log(lista[10]); // Vai exibir o último item da lista => Melissa
+
+        lista.pop(); // Remove o último item da lista (Melissa)
+        console.log(lista);
+
+        // Teste com o pop usando parâmetros
+        
+        // Não adianta informar um valor para o pop, pois ele sempre vai remover o último item da lista
+        var meuPop = lista.pop(2); // Remove o item na "posição 2" da lista (Maria - terceiro item da lista)
+        console.log("Valor removido foi: " + meuPop); // Vai exibir o item removido => Fernanda
+        console.log(lista);
+        // 
+
+        console.log(lista.length); // Vai exibir o tamanho da lista => 9
+        console.log("O tamanho da lista atual é: " + lista.length);
+
+        console.log(lista.reverse()); // Vai inverter a ordem da lista
+        console.log(lista);
+
+        // Teste com "join" de múltiplas formas
+        // o método "join" possui um parâmetro que é o separador dos valores da lista
+        // Se omitido, os elementos do array são separados com uma vírgula (",").
+        console.log(lista.join()) // Vai juntar os valores da lista sem separador
+
+        console.log(lista.join(' - ')); // Vai juntar os valores da lista com o separador informado
+
+        console.log(lista.join(' ')); // Vai juntar os valores da lista com o separador informado
+
+        console.log(lista.join('')); // Vai juntar os valores da lista sem separador
+
+        // uma outra forma é:
+        function f(a, b, c) {
+            var s = Array.prototype.join.call(arguments);
+            var list = [a, b, c];
+            console.log("mesmo resultado => " + list.join());
+            console.log(s); // '1,a,true'
+        }
+            f(1, "a", true);
+            //saida esperada: "1,a,true"
+        
+        // Teste com "split" de múltiplas formas
+        // O método split() divide uma String em uma lista ordenada de substrings, 
+        // coloca essas substrings em um array e retorna o array. 
+        // A divisão é feita procurando um padrão, 
+        // onde o padrão é fornecido como o primeiro parâmetro na chamada do método.
+        // Se o padrão for encontrado, os valores são retornados em um array.
+
+        // Usando split em uma variável do tipo array
+        // lista.split(); // Vai dar erro, pois o split não é um método de um array
+
+        // Usando index no array
+        // lista.index(); // Vai dar erro, pois o index não é um método de um array
+        // console.log(lista.index()); // Vai dar erro, pois o index não é um método de um array
+        
+        // console.log(lista[-1]) resulta em undefined 
+        // é porque os índices negativos não são suportados para acessar elementos de um array em JavaScript.
+        console.log(lista[-1]); // Vai exibir o último item da lista => Gustavo
+
+        console.log("Último elemento da lista: " +lista[lista.length - 1]); // Vai exibir o último item da lista => Gustavo
+
+        // Split é um método de uma string (e não de um array)
+        // Usando split em uma variável do tipo string
+        var str = "How are you doing today?";
+        var res = str.split(" ");
+        console.log(res); // Vai separar a string em um array de palavras
+        
+        // Usando filter em uma variável do tipo array        
+        /*
+            O método filter() cria um novo array com todos os elementos que passaram no teste 
+            implementado pela função fornecida.
+        */ 
+        const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
+        const result = words.filter(word => word.length > 6);
+        console.log(result); // Vai exibir as palavras que possuem mais de 6 letras
+
+        // Usando concat em uma variável do tipo array
+        /*
+            O método concat() é usado para mesclar dois ou mais arrays. 
+            Este método não altera os arrays existentes, mas retorna um novo array.
+        */
+        const array2 = ['a', 'b', 'c'];
+        const array3 = ['d', 'e', 'f'];
+        const array4 = ['g', 'h', 'i'];
+        const array5 = ['j', 'k', 'l'];
+        const array6 = ['m', 'n', 'o'];
+        const array7 = ['p', 'q', 'r'];
+        const array8 = ['s', 't', 'u'];
+        const array9 = ['v', 'w', 'x'];
+        const array10 = ['y', 'z'];
+
+        const array11 = array2.concat(array3, array4, array5, array6, array7, array8, array9, array10);
+        console.log(array11); // Vai exibir a concatenação dos arrays
+        
+
+    </script>
+</body>
+</html>
