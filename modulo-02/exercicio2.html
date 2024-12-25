@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 2 - Cálculo de idade</title>
+</head>
+<body>
+    <script>
+        // Calcular a idade de uma pessoa
+        // var anoNascimento = prompt('Qual é o ano do seu nascimento?');
+        // var anoAtual = prompt('Qual é o ano atual?');
+
+        // Pedir o ano de nascimento e validar se:
+        // o ano é válido (não pode ser maior que o ano atual)
+        // o ano é um número
+        // o ano é menor que o ano atual
+        // var anoNascimento = prompt('Qual é o ano do seu nascimento?');
+        // var anoAtual = prompt('Qual é o ano atual?');
+        
+        var anoAtual = new Date().getFullYear();
+        var msgTemp = "";
+
+        function validaAnoValido(ano) {
+            
+            if (isNaN(ano)) {
+                alert('Por favor, digite um número válido.');
+                return false;
+            }
+            if (ano > anoAtual) {
+                alert('O ano de nascimento não pode ser maior que o ano atual.');
+                return false;
+            }
+            if (ano < 0) {
+                alert('O ano de nascimento não pode ser negativo.');
+                return false;
+            }
+            if (ano == anoAtual) {
+                msgTemp = prompt('Informe quantos meses de vida você tem.');                
+                return true;
+            }
+
+            return true;
+        }
+
+        do {
+            var anoNascimento = prompt('Qual é o ano do seu nascimento?');
+        } while (validaAnoValido(anoNascimento) == false); 
+        
+        
+        var idade = anoAtual - anoNascimento;
+        if (msgTemp != "" && idade === 0) {
+            alert('Você tem ' + msgTemp + ' meses de vida.');
+            
+        } else {
+            alert('Você tem ' + idade + ' anos de vida.');
+        }
+        
+        console.log(anoNascimento);
+        console.log(anoAtual);
+        console.log(idade);
+
+    </script>
+</body>
+</html>
