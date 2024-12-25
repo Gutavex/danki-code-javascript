@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laços de Repetição</title>
+</head>
+<body>
+    <h1>Trabalhando com Laços de Repetição - For-Each</h1>
+    <h2>Exemplos de For-Each</h2>
+    <table>
+        
+    <script>       
+    // exemplos de laços de repetição
+    var nomes = ['Gustavo', 'Maria', 'José', 'João', 'Pedro', 'Ana', 'Paula', 'Lucas', 'Mariana', 'Fernanda'];
+    nomes.forEach(function(nome, indice) {
+        console.log('Nome: ' + nome + ' - Índice: ' + indice);
+    });
+
+    console.log('----------------------');
+
+    // Exemplo 2
+    // MDN - Mozilla Developer Network
+    // Executar uma Função para Cada Elemento
+    var numeros = [1, 2, 3, 4, 5];
+    var soma = 0;
+    numeros.forEach(function(numero) {
+        soma += numero;
+    });
+    console.log('Soma: ' + soma);
+
+    console.log('----------------------');
+
+    // Exemplo 3 -  Você quer fazer uma chamada de API para cada item em um array.
+    // MDN - Mozilla Developer Network
+    // Realizar Operações Assíncronas
+
+
+
+    </script>
+</body>
+</html>

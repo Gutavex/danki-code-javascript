@@ -3,13 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Condições</title>
+    <title>Laços de Repetição</title>
 </head>
 <body>
-    
+    <h1>Trabalhando com Laços de Repetição</h1>
+    <h2>Exemplos de laços de repetição</h2>
+    <table>
+        <ul>
+            <li>for : é como se você tivesse uma lista de crianças e soubesse exatamente quantas são.</li>
+            <li>while : é como se você estivesse distribuindo balões enquanto ainda há crianças na fila.</li>
+            <li>do while : é como se você tivesse que entregar pelo menos um balão, mesmo que não tenha certeza se há crianças na fila.</li>
+            <li>for in : é como se você estivesse verificando as características de cada criança na festa. Você olha para cada característica (nome, idade, altura) e faz algo com essa informação.</li>
+            <li>for of : é como se você tivesse uma cesta de balões de diferentes cores e quisesse entregar um balão de cada cor para as crianças. Você pega um balão de cada vez e entrega.</li>
+        </ul>
     <script>       
+    // exemplos de laços de repetição
+    // for
+    for (var i = 0; i < 10; i++) {
+        console.log('for: ' + i);
+    }
 
-        
+    // while
+    var j = 0;
+    while (j < 10) {
+        console.log('while: ' + j);
+        j++;
+    }
+    
+    // do while
+    var k = 0;
+    do {
+        console.log('do while: ' + k);
+        k++;
+    } while (k < 10);
+
+    // for in
+    var pessoa = {
+        nome: 'Gustavo',
+        idade: 25,
+        altura: 1.74
+    }
+    for (var prop in pessoa) {
+        console.log(prop + ': ' + pessoa[prop]);
+    }
+
+    // for of
+    var frutas = ['Maçã', 'Banana', 'Uva', 'Pera'];
+    for (var fruta of frutas) {
+        console.log(fruta);
+    }
+     
+    console.log('----------------------');
+
+    // Exemplos Danki Code
+    // Exemplo 1
+    var nomes = ['Gustavo', 'Sebas', 'Adiel', 'Maria', 'José', 'João', 'Pedro', 'Ana', 'Paula', 'Carlos', 'Lucas', 'Fernanda'];
+    for (var nome of nomes) {
+        console.log(nome);
+    }
+
+    console.log('----------------------');
+
+    // Ordenando o array
+    nomes.sort();
+    for (var nome of nomes) {
+        console.log(nome);
+    }
+
+
+
+
     </script>
 </body>
 </html>

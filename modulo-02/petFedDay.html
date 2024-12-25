@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validação de Alimentação do Pet</title>
+</head>
+<body>
+    <h1>Validação de Alimentação do Pet</h1>
+    <script>
+        // Data de hoje
+        var dataHoje = new Date();
+        console.log("Data de hoje: " + dataHoje.toLocaleDateString());
+
+        // Data em que o pet foi alimentado pela última vez (exemplo)
+        var petFedDay = new Date('2024-12-23 21:00:00'); // Substitua pela data real
+        console.log("Última vez que o Pet foi alimentado: " + petFedDay.toLocaleDateString());
+
+        // Calcular a data da próxima alimentação
+        var proximaAlimentacao = new Date(petFedDay);
+        proximaAlimentacao.setDate(petFedDay.getDate() + 3);
+        console.log("Próxima alimentação será em: " + proximaAlimentacao.toLocaleDateString());
+
+        // Comparar a data de hoje com a data da próxima alimentação
+        if (dataHoje >= proximaAlimentacao) {
+            console.log('É necessário alimentar o pet hoje.');
+        } else {
+            console.log('O pet foi alimentado recentemente.');
+            console.log("Próxima alimentação será em: " + proximaAlimentacao.toLocaleDateString());
+        }
+
+        // Exibir a data prevista da próxima alimentação na página
+        document.write('<p>Próxima alimentação prevista: ' + proximaAlimentacao.toLocaleDateString() + '</p>');
+    </script>
+</body>
+</html>
