@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classes no JavaScript</title>
+</head>
+<body>
+    <h1>Classes</h1>
+
+    <script>
+        // Classes no JavaScript
+        // Classes são uma forma de criar objetos em JavaScript
+        // Exemplos de Classes em JS
+        class Animal {
+            // Método construtor da classe
+            // Método construtor é um método especial que é chamado quando a classe é instanciada
+            constructor() {
+                this.nome = 'Rex';
+                this.raca = 'Vira-lata';
+                this.peso = 10;
+            }
+
+            // Métodos da classe
+            printAnimal() {
+                console.log('Nome: ' + this.nome);
+                console.log('Raça: ' + this.raca);
+                console.log('Peso: ' + this.peso);
+            }
+
+            getAnimal() {
+                return this.nome;
+            }
+        }
+
+        // Criando uma nova classe específica
+        class Cachorro extends Animal {
+            constructor() {
+                super(); // chama o construtor da classe pai
+                this.orelhas = 'Grandes';
+                // this.nome = 'Rexinho';
+                super.nome = 'Rexinho';
+
+            }
+        }
+
+
+        // Instanciando a classe Animal
+        var animal1 = new Animal();
+        animal1.printAnimal();
+        console.log(animal1.getAnimal());
+        var animal2 = new Cachorro();
+        animal2.printAnimal();
+        console.log(animal2.getAnimal());
+
+
+
+    </script>
+</body>
+</html>

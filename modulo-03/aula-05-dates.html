@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabalhando com Datas no JavaScript</title> 
+    <style>
+        #relogio {
+            font-size: 2em;
+            font-weight: bold;
+        }
+        .relogio {
+            font-size: 2em;
+            font-weight: bold;
+        }
+        div {
+            font-size: 2em;
+            font-weight: bold;
+        }
+    </style>     
+</head>
+<body>
+    <h1>Dates em Javascript</h1>
+    <div id="relogio1"></div>
+    <br>
+    <div id="relogioTempoInicio"></div>
+    <br>
+    <div id="cronometro"></div>
+    <br>
+    <div id="timer"></div>
+    <script>
+        
+        function dateExplanation(){
+        var date = new Date();
+        
+            console.log(date); // data atual (completa e sem formatação)
+            console.log("Dia da semana: ", date.getDay()); // dia da semana (0 a 6, começando pelo Domingo)
+            console.log("Dia do mês: ", date.getDate()); // dia do mês        
+            console.log("Mês do ano: ", date.getMonth()); // mês do ano (0 a 11, começando por Janeiro)
+            console.log("Ano atual: ", date.getFullYear()); // ano
+            console.log("Hora atual: ", date.getHours()); // horas
+            console.log("Minuto atual: ", date.getMinutes()); // minutos
+            console.log("Segundos atual: ", date.getSeconds()); // segundos
+            console.log("Milisegundos atual: ", date.getMilliseconds()); // milisegundos
+            console.log(date.getTime()); // timestamp (milisegundos desde 01/01/1970)
+            console.log("fuso horário (em minutos): ", date.getTimezoneOffset()); // fuso horário (em minutos) O método getTimezoneOffset() retorna a diferença, em minutos, do deslocamento de fuso horário entre o UTC (Tempo Universal Coordenado) e a localidade atual.
+            console.log(date.toDateString()); // data formatada
+            console.log(date.toTimeString()); // hora formatada - O método toTimeString() retorna uma porção de tempo de um objeto Date de forma legível para um ser humano em Inglês Americano.
+            console.log("toLocaleDateString - :", date.toLocaleDateString()); // data formatada de acordo com o idioma do navegador
+            console.log("toLocaleTimeString - :", date.toLocaleTimeString()); // hora formatada de acordo com o idioma do navegador
+            console.log("toISOString - :",date.toISOString()); // data formatada em ISO 8601
+            console.log("toUTCString - :",date.toUTCString()); // data formatada em UTC
+            console.log("toString - :", date.toString()); // data formatada em string
+            console.log("toLocaleString - data formatada de acordo com o idioma do navegador:", date.toLocaleString()); // data formatada de acordo com o idioma do navegador em string
+            console.log("toLocaleString('pt-BR') - data formatada de acordo com o idioma do navegador em string:", date.toLocaleString('pt-BR')); // data formatada de acordo com o idioma do navegador em string
+            console.log(date.toLocaleString('pt-BR', {timeZone: 'America/Sao_Paulo'})); // data formatada de acordo com o idioma do navegador em string e fuso horário
+            console.log(date.toLocaleString('pt-BR', {timeZone: 'America/Sao_Paulo', hour: 'numeric', minute: 'numeric', second: 'numeric'})); // data formatada de acordo com o idioma do navegador em string e fuso horário com hora, minuto e segundo
+            console.log(date.toLocaleString('pt-BR', {timeZone: 'America/Sao_Paulo', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false})); // data formatada de acordo com o idioma do navegador em string e fuso horário com hora, minuto e segundo (24 horas)
+            console.log(date.toLocaleString('pt-BR', {timeZone: 'America/Sao_Paulo', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false, year: 'numeric', month: 'numeric', day: 'numeric'})); // data formatada de acordo com o idioma do navegador em string e fuso horário com hora, minuto e segundo (24 horas) e data completa
+            console.log(date.toLocaleString('pt-BR', {timeZone: 'America/Sao_Paulo', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false, year: 'numeric', month: 'numeric', day: 'numeric', weekday: 'long'})); // data formatada de acordo com o idioma do navegador em string e fuso horário com hora, minuto e segundo (24 horas), data completa e dia da semana
+            console.log(date.toLocaleString('pt-BR', {timeZone: 'America/Sao_Paulo', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false, year: 'numeric', month: 'numeric', day: 'numeric', weekday: 'long', era: 'long'})); // data formatada de acordo com o idioma do navegador em string e fuso horário com hora, minuto e segundo (24 horas), data completa, dia da semana e era
+        }
+        var date = new Date();
+        var segundos = 0;
+        var minutos = 0;
+        var horas = 0;
+        var tempoFormatado = '';
+
+        function atualizarRelogio() {
+            var date = new Date();
+            horas = date.getHours().toString().padStart(2, '0');
+            minutos = date.getMinutes().toString().padStart(2, '0');
+            segundos = date.getSeconds().toString().padStart(2, '0');
+            tempoFormatado = horas + ':' + minutos + ':' + segundos;
+            document.getElementById('relogio1').textContent = tempoFormatado;         
+            
+        }
+
+        // Atualiza o relógio imediatamente e depois a cada segundo
+        atualizarRelogio();
+        setInterval(atualizarRelogio, 1000);
+
+        // Vou criar um relógio que cronometra o tempo que estou ali sem atualizar a página (save)
+        
+        var horasCorridas = 0;
+        var minutosCorridos = 0;
+        var segundosCorridos = 0;
+        
+        function atualizaCronometroSave(){ 
+                        
+            horasCorridas = horasCorridas.toString().padStart(2, '0');
+            minutosCorridos = minutosCorridos.toString().padStart(2, '0');
+            segundosCorridos = segundosCorridos.toString().padStart(2, '0');
+            var tempoCorridoFormatado = horasCorridas + ':' + minutosCorridos + ':' + segundosCorridos;
+            document.getElementById('cronometro').textContent = "Tempo Corrido: " + tempoCorridoFormatado;
+
+            // Se os segundos estao zerados ou chegou em 58, entao incrementa os segundos
+            if (segundosCorridos < 60) {
+                segundosCorridos++;
+            }
+            // Se os segundos chegaram a 59, entao incrementa os minutos em 1 e zera os segundos
+            if (segundosCorridos == 60) {
+                segundosCorridos = 0;
+                minutosCorridos++;                
+                // segundosCorridos++;
+                // console.log(segundosCorridos);
+            }
+            // Se os minutos chegaram a 60, entao incrementa as horas em 1 e zera os minutos
+            if (minutosCorridos == 60) {
+                minutosCorridos = 0;
+                horasCorridas++;
+            }                        
+        }
+
+        atualizaCronometroSave();
+        setInterval(atualizaCronometroSave, 1000);
+
+        // Usuario fornece tempo em minutos 
+        // var timerSelected = 2; // Tempo em minutos
+        // var tempo = 2;
+        // var tempoRestante = 0;
+        var timerSelected = 1;
+        // var tempoRestante = 0 * 60 * 1000; // Tempo em milissegundos
+        var tempoRestante = timerSelected * 60 * 1000; // Tempo em milissegundos
+
+
+        function timer(){
+            // var timerSelected = 2;
+            // var tempo = timerSelected;
+            // var date = new Date();
+            // var tempoAtual = date.getTime(); // timestamp (milisegundos desde 01/01/1970)
+            // var tempoFinal = tempoAtual + parseInt(tempo) * 60000; // 1 minuto = 60000 milisegundos
+            // var tempoRestante = tempoFinal - tempoAtual;
+
+            // 1 segundo = 1000 milisegundos
+
+            // tempoRestante = tempoRestante * 60000; 
+            console.log("Tempo Restante:", tempoRestante);  
+            var horasRestantes = Math.floor((tempoRestante % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); // 1 hora = 60 minutos = 3600 segundos = 3600000 milisegundos
+            var minutosRestantes = Math.floor((tempoRestante % (1000 * 60 * 60)) / (1000 * 60));
+            var segundosRestantes = Math.floor((tempoRestante % (1000 * 60)) / 1000);
+            var tempoRestanteFormatado = horasRestantes.toString().padStart(2, '0') + ':' + minutosRestantes.toString().padStart(2, '0') + ':' + segundosRestantes.toString().padStart(2, '0');
+            document.getElementById('timer').textContent = "Tempo Restante: " + tempoRestanteFormatado;
+            // console.log("Tempo Restante:", tempoRestanteFormatado);
+            // console.log("Tempo Atual:", tempoRestanteFormatado);
+            // console.log("Tempo Final:", tempoRestanteFormatado);
+
+            
+            // if (tempoRestante == 0) {
+            //     alert('O tempo acabou!');
+            // }
+            // if (tempoRestante != 0) {
+            //     tempoRestante = tempoRestante - 1000; 
+            // }
+
+            if (tempoRestante <= 0) {
+                clearInterval(intervaloTimer);
+
+                alert('O tempo acabou!');
+            } else {
+                tempoRestante -= 1000;
+            }
+
+        }
+
+        timer();
+        // setInterval(timer, 1000);
+        var intervaloTimer = setInterval(timer, 1000);
+        // console.log(intervaloTimer);
+
+        document.getElementById('relogioTempoInicio').textContent = "Hora de Início: " + tempoFormatado;
+        // console.log("Tempo Atual (Formatado):", tempoFormatado);
+    </script>
+</body>
+</html>

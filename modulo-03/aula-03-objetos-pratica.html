@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabalhando com Instâncias - Principios básicos</title>
+</head>
+<body>
+    <h1>Instâncias em Javascript</h1>
+    <script>
+        function pessoa(nome, idade, profissao) {
+            // this é uma referência ao objeto atual (pessoa)
+            this.nome = nome;
+            this.idade = idade;
+            this.profissao = profissao;
+            this.contadorConsulta = 0; // contador de consultas a esse objeto
+            this.printNome = function() {
+                console.log('Nome: ' + this.nome);
+                this.contadorConsulta++;
+            }
+            this.printProfissao = function() {
+                console.log('Profissão: ' + this.profissao); 
+                this.contadorConsulta++;
+            }
+            this.printIdade = function() {
+                console.log('Idade: ' + this.idade);
+                this.contadorConsulta++;
+            }
+            this.returnAnimalGenerico = function(animal){
+            return animal;
+            }
+        }
+        
+        var pessoa1 = new pessoa('Gustavo', 35, 'Desenvolvedor Fullstack JS / QA Fullstack (automation)');
+        pessoa1.printNome();
+        pessoa1.printProfissao();
+
+        var pessoa2 = new pessoa('Maria', 25, 'Desenvolvedora Frontend');
+        pessoa2.printNome();
+        pessoa2.printProfissao();
+
+        console.log(pessoa1.contadorConsulta);
+
+
+        // Function para um Animal com parâmetros
+        function animal(nome, raca, peso){
+        this.nome = nome;
+        this.raca = raca;
+        this.peso = peso;
+        this.printAnimal = function(){
+            console.log('Nome: ' + this.nome);
+            console.log('Raça: ' + this.raca);
+            console.log('Peso: ' + this.peso);
+            }
+        
+        }
+
+        animal1 = new animal('Rex', 'Vira-lata', 10);
+        animal1.printAnimal(); 
+        console.log("----------------------");    
+        
+        // Function para um Animal com parâmetros
+        function animalGenerico(nome, raca, peso){
+            if (nome == undefined) {
+                this.nome = 'Nome não Informado';
+            } else {
+                this.nome = nome;
+            }
+
+            if (raca == undefined) {
+                this.raca = 'Raça não Informada';
+            } else {
+                this.raca = raca;
+            }
+            if (peso == undefined) {
+                this.peso = 'Peso não Informado';
+            } else {
+                this.peso = peso;
+            }
+
+            this.printAnimal = function(){
+                console.log('Nome: ' + this.nome);
+                console.log('Raça: ' + this.raca);
+                console.log('Peso: ' + this.peso);
+            }
+         }
+
+        animal2 = new animalGenerico('Pitu', 'Chiuawa', 2);
+
+        //  Uso recursivo da função (objeto) animalGenerico ao chamar a função pessoa
+        console.log(pessoa1.returnAnimalGenerico(animal2.printAnimal()));
+        // pessoa1.returnAnimalGenerico(animal2).printAnimal();
+        // console.log(pessoa1);
+        console.log("----------------------"); 
+
+    </script>
+</body>
+</html>
