@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabalhando com Objetos - Principios básicos</title>
+</head>
+<body>
+    
+    <script>
+        var objetos = {
+            nome: 'Gustavo',
+            idade: 35,
+            profissao: 'Desenvolvedor Fullstack JS / QA Fullstack (automation)',
+            empresa: 'Teixeira Inc.',
+            ativo: true,
+            projetos: ['Projeto 1', 'Projeto 2', 'Projeto 3'],
+            endereco: {
+                rua: 'Rua 1',
+                numero: 123,
+                bairro: 'Bairro 1',
+                cidade: 'Cidade 1',
+                estado: 'Estado 1'
+            },
+            saudacao: function() {
+                return 'Olá, meu nome é ' + this.nome + ' e tenho ' + this.idade + ' anos.';
+            }
+        };
+
+        console.log(objetos.nome);
+        console.log(objetos.projetos);
+         
+        for (let e of objetos.projetos) {
+            console.log(e);            
+        }
+
+        // Objeto com pessoas e suas características (Nome, Idade e Profissão)
+        var pessoas = [
+            {
+                nome: 'Gustavo',
+                idade: 36,
+                profissao: 'Desenvolvedor Fullstack JS / QA Fullstack (automation)'
+            },
+            {
+                nome: 'Maria',
+                idade: 25,
+                profissao: 'Desenvolvedora Frontend'
+            },
+            {
+                nome: 'José',
+                idade: 26,
+                profissao: 'Desenvolvedor Backend'
+            },
+            {
+                nome: 'João',
+                idade: 40,
+                profissao: 'Gerente de Projetos'
+            },
+            {
+                nome: 'Pedro',
+                idade: 48,
+                profissao: 'Gerente de Produtos'
+            },
+            {
+                nome: 'Ana',
+                idade: 30,
+                profissao: 'Desenvolvedora Frontend'
+            },
+            {
+                nome: 'Paula',
+                idade: 27,
+                profissao: 'Desenvolvedor Backend'
+            },
+            {
+                nome: 'Lucas',
+                idade: 19,
+                profissao: 'Desenvolvedor Backend'
+            },
+            {
+                nome: 'Mariana',
+                idade: 28,
+                profissao: 'QA Fullstack (automation)'
+            },
+            {
+                nome: 'Fernanda',
+                idade: 18,
+                profissao: 'QA Fullstack (automation)'
+            },
+            {
+                nome: 'Carlos',
+                idade: 21,
+                profissao: 'Desenvolvedor Backend'
+            }
+
+        
+        ]; 
+        
+        console.log(pessoas);
+        console.log(pessoas[0].nome);
+        console.log(pessoas[1].nome);
+        console.log(pessoas[2].nome);
+
+        // Trabalhando com as inforações do objeto
+        var qas = [];
+        var devs = [];
+        var managers = [];
+        
+        for (const E of pessoas) {
+            if (E.profissao === 'QA Fullstack (automation)') {
+                qas.push(E);
+            } else if (E.profissao === 'Desenvolvedor Backend') {
+                devs.push(E);
+            } else if (E.profissao === 'Gerente de Projetos' || E.profissao === 'Gerente de Produtos') {
+                managers.push(E);
+            }
+            
+        }
+        console.log('QAs: ', qas);
+        console.log('Devs: ', devs);
+        console.log('Managers: ', managers);
+        
+    </script>
+</body>
+</html>
