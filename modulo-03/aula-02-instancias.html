@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabalhando com Instâncias - Principios básicos</title>
+</head>
+<body>
+    <h1>Instâncias em Javascript</h1>
+    <script>
+        function pessoa(nome, idade, profissao) {
+            // this é uma referência ao objeto atual (pessoa)
+            this.nome = nome;
+            this.idade = idade;
+            this.profissao = profissao;
+        }
+        
+        var pessoa1 = new pessoa('Gustavo', 35, 'Desenvolvedor Fullstack JS / QA Fullstack (automation)');
+        var pessoa2 = new pessoa('Maria', 25, 'Desenvolvedora Frontend');
+        var pessoa3 = new pessoa('José', 26, 'Desenvolvedor Backend');
+
+        console.log(pessoa1);
+        console.log(pessoa2);
+        console.log(pessoa3);
+
+        // Instâncias de objetos
+        // Instâncias são objetos criados a partir de uma função construtora
+        // Instâncias são objetos que possuem propriedades e métodos da função construtora
+
+        var pessoas = [];
+        pessoas.push(pessoa1);
+        pessoas.push(pessoa2);
+        pessoas.push(pessoa3);
+
+        console.log(pessoas);
+
+        for (let p of pessoas) {
+            console.log(p.nome);
+            console.log(p.idade);
+            console.log(p.profissao);
+        }
+
+        pessoas.forEach(function(p) {
+            console.log(p.nome);
+            console.log(p.idade);
+            console.log(p.profissao);
+        });
+
+        pessoas.push(new pessoa('João', 40, 'Gerente de Projetos'));
+
+        console.log(pessoas);
+        
+    </script>
+</body>
+</html>
