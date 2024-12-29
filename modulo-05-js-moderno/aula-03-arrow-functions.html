@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Javascript Moderno - Arrow Functions</title>
+  </head>
+  <body>
+    <script>
+      /*
+            -> var é global (e local)
+            -> let é local
+            -> const é local
+            -> Block Scopes - escopo de bloco   
+        */
+
+      let a = 10;
+      let b = 5;
+
+      function somar(a, b) {
+        return a + b;
+      }
+
+      console.log(somar(a, b));
+
+      // Arrow Function
+      const somarArrow = (a, b) => (a + b)*2;
+      console.log(somarArrow(a, b));
+
+      // Arrow Function com um parâmetro de outra Arrow Function
+      const dobrar = a => a * 2;
+      console.log(dobrar(a));
+
+      // Arrow Function com um parâmetro de outra Arrow Function
+      const funcFunc = (funcSomar) => {
+        funcSomar();
+      }
+
+      funcFunc(() => {
+        console.log('Executando uma função dentro de outra função');
+        console.log(somar(a, b));
+      });
+
+      // Seguindo a mesma lógica, podemos fazer o seguinte pra mandar um parametro adicional de texto:
+      const enviaTexto = (texto, funcTexto) => {
+        funcTexto(texto);
+      }
+
+      enviaTexto('Testando a função de enviar texto', (texto) => {
+        console.log(texto);
+      });
+      
+    </script>
+  </body>
+</html>

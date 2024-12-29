@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conhecendo Javascript Moderno</title>
+</head>
+<body>
+    
+    <script>
+        var conteudo = `lorem ipsum dolor sit amet consectetur adipisicing elit 
+        
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+        
+        `;
+
+        console.log(conteudo);
+
+        // Usando template string para incluir uma variável
+        console.log(`O conteudo é: ${conteudo}`);
+
+        // Usando template string para criar um HTML
+        var html = `
+            <h1>Titulo da Noticia</h1>
+            <p>${conteudo}</p>
+        `;
+        // inserindo o HTML no body
+        document.body.innerHTML = html;
+    </script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Javascript Moderno - Rest -> Spread (Destructure)</title>
+  </head>
+  <body>
+    <script>
+      // Objeto contendo chave e valor (nomes)
+      const nomes = [
+        { nome: "José", idade: 30 },
+        { nome: "Maria", idade: 25 },
+        { nome: "João", idade: 20 },
+        { nome: "Pedro", idade: 35 },
+        { nome: "Ana", idade: 40 },
+      ];
+      console.log(nomes);
+
+      // Usando o spread para adicionar um novo objeto ao array (na priemira posição)
+      const novo = [...nomes, { nome: "Carlos", idade: 45 }];
+      console.log(novo);
+
+      // Conceito de spread: espalhar os elementos de um array ou objeto
+      // Conceito de rest: pegar o restante dos elementos de um array ou objeto
+
+      const outrosNomes = [
+        { nome: "Gustavo", idade: 45 },
+        { nome: "Marta", idade: 50 },
+        { nome: "Lucas", idade: 55 },
+      ];
+
+      novo.push(...outrosNomes);
+      console.log(novo);
+
+      // Outro exemplo de rest
+      function restExample(a, b, ...args) {
+        console.log(a, b, args);
+      }
+
+      console.log(restExample(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+
+      //  Outro exemplo de spread
+      const arr1 = [1, 2, 3];
+      const arr2 = [4, 5, 6];
+      const arr3 = [7, 8, 9];
+
+      const arr4 = [...arr1, ...arr2, ...arr3];
+      console.log(arr4);
+
+      // Outro exemplo de reste com função
+      function lengthCount(...args) {
+        // Mostrando o tamanho do array
+        console.log(args.length);
+        // Mostrando o array
+        console.log(...args);
+        // Mostrando os elementos do array
+        args.forEach((element) => {
+          console.log(element);
+        });
+      }
+
+      lengthCount(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+      lengthCount(1, "teste", false);
+      lengthCount("a", "b", "c", "d", "e", "f", "g", "h", "i", "j");
+
+      // Usando array.prototype.map() com spread
+      const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      const arrMap = arr.map((item) => item * 2);
+      console.log(arrMap);
+
+      //   Usando array.prototype.map() com spread
+      const array1 = [1, 4, 9, 16, 5];
+      console.log("--------- array1 ---------");
+      console.log(array1);
+
+      // Pass a function to map
+      const map1 = array1.map((x) => x * 2);
+
+      console.log("--------- map1 ---------");
+      console.log(map1);
+      // Expected output: Array [2, 8, 18, 32]
+
+      // Usando array.prototype.map() com rest
+      function multiply(multiplier, ...theArgs) {
+        console.log("--------- theArgs ---------");
+        console.log(theArgs);
+        console.log("---------------------------");
+        return theArgs.map(function (element) {
+          return multiplier * element;
+        });
+      }
+
+      var arr5 = multiply(2, 1, 4, 9, 16, 5);
+      console.log("--------- arr5 ---------");
+      console.log(arr5); // [2, 4, 6]
+      console.log("---------------------------");
+
+      //   Usando métodos do array em rest parameters
+      function sortRestArgs(...theArgs) {
+        var sortedArgs = theArgs.sort();
+        return sortedArgs;
+      }
+
+      console.log(5, 3, 7, 1); // Exibe 5,3,7,1
+      console.log(sortRestArgs(5, 3, 7, 1)); // Exibe 1,3,5,7
+
+      // Da mesma forma, o operador spread funciona com chamadas de função:
+      function f(x, y, z) {
+        console.log(arguments);
+      }
+      console.log("---------------------------");
+      var args = [0, 1, 2];
+      f(...args);
+
+
+      console.log("-------- Exemplo MDN ---------------");
+      function f(a, b){
+        var args = Array.prototype.slice.call(arguments, f.length);
+        console.log(args)
+        console.log(f.arguments)
+        console.log(f.length)
+            // ...
+        }
+        f(1, 2); 
+
+        console.log("---------------------------");
+        // esse é o equivalente
+        function argumentoRest(a, b, ...args) {
+            console.log(arguments)
+          }
+          argumentoRest(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    </script>
+  </body>
+</html>

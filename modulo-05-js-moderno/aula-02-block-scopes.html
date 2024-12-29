@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Javascript Moderno - Block Scopes</title>
+  </head>
+  <body>
+    <script>
+      /*
+            -> var é global (e local)
+            -> let é local
+            -> const é local
+            -> Block Scopes - escopo de bloco   
+        */
+
+      // global
+      var a = 1;
+
+      {
+        var a = 2;
+      }
+      //   local
+      let b = 10;
+
+      {
+        let b = 20;
+        // console.log(b);
+      }
+
+      //   local
+      const c = 100;
+
+      {
+        const c = 200;
+        // console.log(c);
+      }
+      console.log(a);
+      console.log(b);
+      console.log(c);
+    </script>
+  </body>
+</html>

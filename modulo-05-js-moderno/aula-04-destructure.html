@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Javascript Moderno - Destructure</title>
+  </head>
+  <body>
+    <script>
+      //   console.log(somar(a, b));
+
+      //  Destructure - Desestruturação
+      //  -> Atribuição via desestruturação
+      //  -> Array
+      //  -> Object
+
+      // Exenmplo com Array
+      const nomes = ["José", "Maria", "João", "Pedro", "Ana"];
+      [primeiro, segundo, terceiro, quarto, quinto] = nomes;
+      //   console.log(primeiro);
+
+      // Utilizando o rest operator (...) para pegar o restante dos valores do array
+      [a, b, ...rest] = nomes;
+      console.log(a); // 1
+      console.log(b); // 2
+      console.log(rest); // [3, 4, 5]
+
+      //   Exemplo com objeto
+      // ES2016 - não implementado em Firefox 47a01
+      ({ a, b, ...rest } = { a: 1, b: 2, c: 3, d: 4 });
+      console.log(Array.isArray(rest)); // Check if rest is an array
+      console.log(rest); // { c: 3, d: 4 }
+
+      // Usando for...in para percorrer um objeto
+      console.log("------------------- for...in");
+      for (const key in rest) {
+        if (rest.hasOwnProperty(key)) {
+          // Mostrando a chave e o valor contido na chave do objeto
+          console.log(`${key}: ${rest[key]}`);
+        }
+      }
+
+      //   Usando Object.entries() para percorrer um objeto
+      //   const { a, b, ...rest } = { a: 1, b: 2, c: 3, d: 4 };
+      console.log("------------------- Object.entries().forEach");
+      Object.entries(rest).forEach(([key, value]) => {
+        console.log(`${key}: ${value}`);
+      });
+    </script>
+  </body>
+</html>
