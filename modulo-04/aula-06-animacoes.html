@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animações com Javascript</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: all 1s;
+        }
+        .box:hover{
+            background-color: blue;
+        }
+
+        .animaEsquerda{
+            left: 100px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+
+    <script>
+        var box = document.querySelector('.box');
+
+        // adicionando uma classe ao elemento
+        box.classList.add('animaEsquerda');
+
+        // removendo uma classe do elemento
+        // box.classList.remove('animaEsquerda');
+
+        // Animando uma propriedade do elemento
+        setTimeout(function(){
+            box.style.left = '400px';
+        }, 1000);
+
+
+        // Adicionando um evento de click
+        box.addEventListener('click', function(){
+            // alert('Clicou no elemento');
+            // box.classList.remove('animaEsquerda');
+            box.style.top = '200px';
+        });
+    </script>
+</body>
+</html>

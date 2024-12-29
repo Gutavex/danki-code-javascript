@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercicio de criação de SLIDER</title>
+    <style>
+      .container {
+        position: relative;
+        height: 500px;
+        /* width: 200px; */
+        /* overflow: hidden; */
+      }
+
+      .container img {
+        /* width: 200px; */
+        /* height: 300px; */
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        opacity: 0;
+        /* justify-content: center; */
+        transition: opacity 1s;
+      }
+
+      .bullets {
+        text-align: center;
+        /* display: flex;
+        justify-content: center;
+        margin-top: 10px; */
+      }
+
+      .bullet-single {
+        margin: 0 8px;
+        cursor: pointer;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+        background-color: #ccc;
+      }
+
+      .active-bullet {
+        background-color: #333;
+        /* width: 20px;
+        height: 20px;
+        display: inline-block; */
+        /* margin: 0 8px;
+        border-radius: 50%;
+        cursor: pointer; */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- PICSUM:  https://picsum.photos/  -->
+      <img style="opacity: 1" src="https://picsum.photos/id/57/300/200" />
+      <img src="https://picsum.photos/id/44/300/200" />
+      <img src="https://picsum.photos/id/48/300/200" />
+    </div>
+
+    <div class="bullets">
+      <div class="bullet-single active-bullet"></div>
+      <div class="bullet-single"></div>
+      <div class="bullet-single"></div>
+    </div>
+
+    <script>
+      var imgs = document.querySelectorAll(".container img");
+      //   var bullets = document.querySelectorAll(".bullet-single");
+      //   var activeBullet = document.querySelector(".active-single-bullet");
+      console.log(imgs);
+      console.log("<---------------> imgs.length: ", imgs.length);
+
+      // bullets
+      var bullets = document.querySelectorAll(".bullet-single");
+      console.log(bullets);
+
+      var lastIndex = 0;
+
+      //   function next() {
+      //     img[index].style.opacity = 0;
+      //     bullets[index].classList.remove("active-single-bullet");
+      //     index++;
+      //     if (index > img.length - 1) {
+      //       index = 0;
+      //     }
+      //     img[index].style.opacity = 1;
+      //     bullets[index].classList.add("active-single-bullet");
+      //   }
+
+      //   setInterval(next, 3000);
+
+      //   imgs.forEach(function (item, indexImg) {
+      //     // item.style.opacity = 0;
+      //     // bullets.querySelectorAll(".bullet-single")[indexImg].addEventListener("click", function () {
+      //     bullets[indexImg].addEventListener("click", function () {
+      //       // this line is corrected
+      //       // img[indexImg].style.opacity = 1;
+      //       // let lastImage = document.querySelectorAll('.container img')[index];
+      //       let lastImage = imgs[index]; // this line is corrected
+      //       console.log(lastImage);
+      //       let currentImage =
+      //         document.querySelectorAll(".container img")[indexImg];
+      //       console.log(currentImage);
+      //       index = indexImg;
+
+      //       lastImage.style.opacity = 0;
+      //       currentImage.style.opacity = 1;
+      //     });
+
+      //     // bullets[indexImg].classList.remove("active-single-bullet");
+
+      //     // if (indexImg === 0) {
+      //     //   item.style.opacity = 1;
+      //     //   bullets[indexImg].classList.add("active-single-bullet");
+      //     // }
+      //   });
+
+      // Forma correta ***************
+      // Percorrer todos os bullets para adicionar um evento de click e
+      // adicionar a classe active-bullet ao bullet clicado (e removendo a do anterior)
+      // e esconder a imagem anterior e mostrar a imagem atual
+      imgs.forEach((item, index) => {
+        document
+          .querySelectorAll(".bullet-single")
+          [index].addEventListener("click", () => {
+            // variável para receber a imagem anterior e remover a opacidade
+            let lastImage = imgs[lastIndex]; //imgs[index];
+            console.log("<------> Index Imagem ANTERIOR... ", lastImage);
+
+            // variável para receber a imagem atual e adicionar a opacidade
+            let currentImage =
+              document.querySelectorAll(".container img")[index]; //imgs[indexImg];
+            console.log("<------> Index Imagem ATUAL... ", currentImage);
+            
+            // Alterando a opacidcade das imagens
+            lastImage.style.opacity = 0;
+            currentImage.style.opacity = 1;
+            console.log("<------------------------------>");
+            console.log(bullets[index]);
+            
+            // Removendo a classe active-bullet do bullet anterior
+            bullets[lastIndex].classList.remove("active-bullet");
+            
+            // Adicionando a classe active-bullet ao bullet clicado
+            bullets[index].classList.add("active-bullet");
+
+            // Atualizando o index da imagem anterior
+            lastIndex = index;
+          });
+      });
+
+      // const elements = document.querySelectorAll(".your-selector");
+      // console.log(elements); // Check if this logs the correct elements
+      // elements.forEach((element) => {
+      //   if (element) {
+      //     element.addEventListener("click", () => {
+      //       // Your event handler code
+      //     });
+      //   } else {
+      //     console.error("Element is undefined");
+      //   }
+      // });
+
+      //   bullets.forEach(function (item, indexBullet) {
+      //     item.addEventListener("click", function () {
+      //       img[index].style.opacity = 0;
+      //       bullets[index].classList.remove("active-single-bullet");
+      //       index = indexBullet;
+      //       img[index].style.opacity = 1;
+      //       bullets[index].classList.add("active-single-bullet");
+      //     });
+      //   });
+    </script>
+  </body>
+</html>

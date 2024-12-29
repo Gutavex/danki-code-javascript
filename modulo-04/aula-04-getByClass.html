@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manipulando o DOM - getElementsByClassName()</title>
+</head>
+<body>
+    
+    <div class="box" id="box1">
+        <!-- <h1>Manipulando o DOM</h1> -->
+        <!-- <p>Texto de exemplo</p>         -->
+
+    </div>
+    <div class="box" id="box2">
+        <!-- <h1>Manipulando o DOM</h1>
+        <p>Texto de exemplo</p>         -->
+
+    </div>
+    <div class="box" id="box3">
+        <!-- <h1>Manipulando o DOM</h1>
+        <p>Texto de exemplo</p>         -->
+
+    </div>
+    <div class="box" id="box4">
+        <!-- <h1>Manipulando o DOM</h1>
+        <p>Texto de exemplo</p>         -->
+
+    </div>
+    <div class="box" id="box5">
+        <!-- <h1>Manipulando o DOM</h1>
+        <p>Texto de exemplo</p>         -->
+
+    </div>
+    <script>
+        // getElementById() - Retorna o elemento que possui o ID especificado
+        // var el = document.getElementById('box');
+        // el.style.width = 'auto'; // Altera a largura do elemento
+        // el.style.color = 'white'; // Altera a cor do texto do elemento
+        // el.style.backgroundColor = 'red'; // Altera a cor de fundo do elemento
+        // el.style.marginLeft = '50px'; // Altera a margem esquerda do elemento
+        // el.style.marginRight = '50px'; // Altera a margem direita do elemento
+
+        var elementos = document.getElementsByClassName('box');
+        
+        var el = elementos[0].innerHTML = 'Texto alterado';
+
+        for(var i = 0; i < elementos.length; i++){
+            // Alterar todos os elementos para o centro da tela
+            elementos[i].style.width = '100px';
+            elementos[i].style.height = '100px';
+            elementos[i].style.color = 'blue';
+            elementos[i].style.textAlign = 'center';
+            elementos[i].style.borderColor = 'black';
+            elementos[i].style.borderStyle = 'solid';
+            // alinhar objetos ao centro
+            elementos[i].style.margin = '0 auto';
+            elementos[i].style.marginTop = '10px';
+
+            elementos[i].style.backgroundColor = 'red';
+            // elementos[i].style.marginLeft = '50px';
+            // elementos[i].style.marginRight = '50px';
+
+            elementos[i].innerHTML = 'Texto alterado ' + (i + 1) ;
+        }
+    </script>
+</body>
+</html>
