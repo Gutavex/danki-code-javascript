@@ -124,3 +124,169 @@ function f(x, y, z) {
 var args = [0, 1, 2];
 f(...args);
 ```
+
+# PROMISE ASYNC/AWAIT
+
+-> PROMISE: 
+## Promise
+
+A `Promise` é um objeto que representa a eventual conclusão (ou falha) de uma operação assíncrona e seu valor resultante. 
+Promises são usadas para lidar com operações assíncronas de forma mais elegante do que callbacks aninhados.
+
+### Exemplo de Promise
+
+```javascript
+const fetchData = () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const data = { user: "John", age: 30 };
+            resolve(data);
+        }, 2000);
+    });
+};
+
+fetchData()
+    .then(data => {
+        console.log("Data fetched:", data);
+    })
+    .catch(error => {
+        console.error("Error fetching data:", error);
+    });
+```
+
+## Async/Await
+
+`Async/Await` é uma sintaxe que simplifica o uso de Promises, tornando o código assíncrono mais legível e fácil de escrever. 
+
+>>`async` define uma função assíncrona e 
+>>`await` pausa a execução da função assíncrona até que a Promise seja resolvida.
+
+### Exemplo de Async/Await
+
+```javascript
+const fetchData = () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const data = { user: "John", age: 30 };
+            resolve(data);
+        }, 2000);
+    });
+};
+
+const getData = async () => {
+    try {
+        const data = await fetchData();
+        console.log("Data fetched:", data);
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+};
+
+getData();
+```
+
+Esses exemplos mostram como Promises e Async/Await podem ser usados para lidar com operações assíncronas de forma clara e eficiente.
+
+<!-- CONCEITO FUNDAMENTAL -->
+# CONCEITO FUNDAMENTAL
+
+Ao trabalhar com Promises e Async/Await, é importante ter em mente alguns conceitos fundamentais para garantir que seu código seja eficiente e fácil de manter:
+
+1. **Encadeamento de Promises**: Sempre retorne uma Promise em um `.then()` para permitir o encadeamento. Isso ajuda a evitar o "callback hell" e mantém o código mais limpo.
+
+2. **Tratamento de Erros**: Utilize `.catch()` para capturar erros em Promises e `try...catch` em funções assíncronas. Isso garante que erros sejam tratados de forma adequada e evita que o código falhe silenciosamente.
+
+3. **Evite Bloqueios**: Async/Await pode fazer com que o código pareça síncrono, mas lembre-se de que ele ainda é assíncrono. Evite operações que possam bloquear o event loop, como loops longos ou operações de E/S síncronas.
+
+4. **Performance**: Use `Promise.all()` para executar Promises em paralelo quando possível. Isso pode melhorar significativamente a performance do seu código ao lidar com múltiplas operações assíncronas.
+
+### Exemplo Clássico de Performance com `Promise.all()`
+
+Um exemplo clássico de uso de `Promise.all()` é quando precisamos buscar dados de múltiplas APIs ao mesmo tempo. Em vez de esperar que cada chamada de API seja concluída antes de iniciar a próxima, podemos iniciar todas as chamadas de API simultaneamente e esperar que todas sejam concluídas.
+
+```javascript
+const fetchUser = () => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve({ user: "John" });
+        }, 1000);
+    });
+};
+
+const fetchPosts = () => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(["Post 1", "Post 2"]);
+        }, 1500);
+    });
+};
+
+const fetchComments = () => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(["Comment 1", "Comment 2"]);
+        }, 500);
+    });
+};
+
+const fetchData = async () => {
+    try {
+        const [user, posts, comments] = await Promise.all([fetchUser(), fetchPosts(), fetchComments()]);
+        console.log("User:", user);
+        console.log("Posts:", posts);
+        console.log("Comments:", comments);
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+};
+
+fetchData();
+```
+
+### Exemplo Lúdico de Performance com `Promise.all()`
+
+Imagine que você está organizando uma festa e precisa preparar várias coisas ao mesmo tempo: comprar bebidas, preparar a comida e decorar o local. Em vez de fazer uma tarefa de cada vez, você pode pedir ajuda aos seus amigos e fazer tudo simultaneamente.
+
+```javascript
+const buyDrinks = () => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve("Drinks bought");
+        }, 1000);
+    });
+};
+
+const prepareFood = () => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve("Food prepared");
+        }, 2000);
+    });
+};
+
+const decoratePlace = () => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve("Place decorated");
+        }, 1500);
+    });
+};
+
+const organizeParty = async () => {
+    try {
+        const [drinks, food, decoration] = await Promise.all([buyDrinks(), prepareFood(), decoratePlace()]);
+        console.log(drinks);
+        console.log(food);
+        console.log(decoration);
+        console.log("Party is ready!");
+    } catch (error) {
+        console.error("Error organizing party:", error);
+    }
+};
+
+organizeParty();
+```
+
+5. **Legibilidade**: Prefira Async/Await para melhorar a legibilidade do código. Embora Promises sejam poderosas, Async/Await geralmente resulta em código mais fácil de entender e manter.
+
+Seguindo esses conselhos, você pode escrever código assíncrono em JavaScript de maneira mais eficiente e robusta.

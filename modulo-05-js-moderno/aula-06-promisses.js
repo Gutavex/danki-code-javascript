@@ -112,7 +112,7 @@ const fetchData = () => {
       setTimeout(() => {
           const data = { user: "John", age: 30 }; // Simulando um retorno de uma API
           // let valor;
-          resolve();
+          resolve(valor);
       }, 2000);
   });
 };

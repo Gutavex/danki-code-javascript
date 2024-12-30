@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorteio Aleatório</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+        .participants {
+            margin-top: 40px;
+        }
+        .participants table {
+            width: 100%;
+            border-collapse: collapse;
+            transition: all 0.3s ease;
+        }
+        .participants th, .participants td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .participants th {
+            background-color: #f2f2f2;
+        }
+        .participants tr:hover {
+            background-color: #f1f1f1;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #d4edda;
+            color: #155724;
+            display: none;
+        }
+        .result p {
+            margin: 0;
+        }
+        .editing {
+            background-color: #f8d7da;
+        }
+        .saved {
+            background-color: #d4edda;
+            transition: background-color 2s;
+        }
+        .remove-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        .remove-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sorteio Aleatório</h1>
+        <div class="form-group">
+            <label for="name">Inserir nome da pessoa</label>
+            <input type="text" id="name">
+        </div>
+        <div class="form-group">
+            <button onclick="addPerson()">Inserir Pessoa</button>
+        </div>
+        <div class="form-group">
+            <button onclick="generateDraw()" disabled>Gerar Sorteio</button>
+        </div>
+        <div class="participants">
+            <h2>Participantes</h2>
+            <button onclick="draw()" style="float: right;">Sortear</button>
+            <table id="participantsTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Sobrenome</th>
+                        <th>Idade</th>
+                        <th>Cidade</th>
+                        <th>Porcentagem dos Votos</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="form-group">
+            <button onclick="resetDraw()">Reiniciar Sorteio</button>
+        </div>
+        <div class="result" id="result">
+            <p>Parabéns, o sorteado foi <span id="winnerName"></span></p>
+            <p>Porcentagem de votos: <span id="winnerVotes"></span>%</p>
+            <p>Probabilidade de ser sorteado: <span id="winnerProbability"></span>%</p>
+        </div>
+    </div>
+
+    <script>
+        let participants = [];
+        let idCounter = 1;
+
+        function addPerson() {
+            const name = document.getElementById('name').value;
+
+            const person = {
+                id: idCounter++,
+                name,
+                surname: '',
+                age: '',
+                city: '',
+                votes: null
+            };
+
+            participants.push(person);
+            updateParticipantsTable();
+        }
+
+        function updateParticipantsTable() {
+            const tbody = document.getElementById('participantsTable').querySelector('tbody');
+            tbody.innerHTML = '';
+
+            participants.forEach(person => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${person.id}</td>
+                    <td contenteditable="false">${person.name}</td>
+                    <td contenteditable="false">${person.surname}</td>
+                    <td contenteditable="false">${person.age}</td>
+                    <td contenteditable="false">${person.city}</td>
+                    <td contenteditable="false">${person.votes !== null ? person.votes : 'N/A'}</td>
+                    <td>
+                        <button onclick="editPerson(this)">Editar</button>
+                        <button onclick="savePerson(this)" style="display:none;">Salvar</button>
+                        <button class="remove-btn" onclick="removePerson(${person.id})">Remover</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function editPerson(button) {
+            const row = button.parentElement.parentElement;
+            row.classList.add('editing');
+            button.style.display = 'none';
+            button.nextElementSibling.style.display = 'inline';
+            const cells = row.querySelectorAll('td');
+            for (let i = 1; i < cells.length - 1; i++) {
+                cells[i].setAttribute('contenteditable', 'true');
+            }
+        }
+
+        function savePerson(button) {
+            const row = button.parentElement.parentElement;
+            const cells = row.querySelectorAll('td');
+            const id = cells[0].innerText;
+            const person = participants.find(p => p.id == id);
+
+            person.name = cells[1].innerText;
+            person.surname = cells[2].innerText;
+            person.age = cells[3].innerText;
+            person.city = cells[4].innerText;
+            person.votes = cells[5].innerText !== 'N/A' ? cells[5].innerText : null;
+
+            row.classList.remove('editing');
+            row.classList.add('saved');
+            setTimeout(() => row.classList.remove('saved'), 2000);
+
+            button.style.display = 'none';
+            button.previousElementSibling.style.display = 'inline';
+            for (let i = 1; i < cells.length - 1; i++) {
+                cells[i].setAttribute('contenteditable', 'false');
+            }
+        }
+
+        function removePerson(id) {
+            participants = participants.filter(p => p.id !== id);
+            updateParticipantsTable();
+        }
+
+        function generateDraw() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'none';
+        }
+
+        function draw() {
+            if (participants.length === 0) {
+                alert('Nenhum participante adicionado.');
+                return;
+            }
+
+            const winnerIndex = Math.floor(Math.random() * participants.length);
+            const winner = participants[winnerIndex];
+
+            const resultDiv = document.getElementById('result');
+            document.getElementById('winnerName').innerText = `${winner.name} ${winner.surname}`;
+            document.getElementById('winnerVotes').innerText = winner.votes !== null ? winner.votes : 'N/A';
+            document.getElementById('winnerProbability').innerText = (1 / participants.length * 100).toFixed(2);
+
+            resultDiv.style.display = 'block';
+        }
+
+        function resetDraw() {
+            const reset = confirm('Deseja reiniciar do zero com novas pessoas ou com as mesmas? OK para novas, Cancelar para mesmas.');
+            if (reset) {
+                participants = [];
+                idCounter = 1;
+                updateParticipantsTable();
+            }
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

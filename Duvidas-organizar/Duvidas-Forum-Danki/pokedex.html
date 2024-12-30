@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokedex Duvidas</title>
+    <link rel="stylesheet" href="pokedex.css" />
+  </head>
+  <body>
+    <form id="form">
+      <input
+        id="quantidade"
+        type="number"
+        name="quantidade"
+        placeholder="Insira a quantidadede de pokemons"
+      />
+      <button type="submit" value="Submit">Enviar</button>
+      <div>
+        <div class="pokemon-boxes">
+          <!-- <div id="quantidade"></div> -->
+        </div>
+      </div>
+    </form>
+    <script>
+    //   async function pegaQuantidadePokemon() {
+    //     const apiUrl = await "https://pokeapi.co/api/v2/pokemon";
+    //     const resposta = await fetch(apiUrl);
+    //     const data = resposta.json();
+    //     const count = data.count;
+    //     document.getElementById(
+    //       "quantidade"
+    //     ).textContent = `Quantidade de Pokémons: ${count}`;
+    //     // return count;
+    //   }
+
+      function pegaPokemon(quantidade) {
+        // let totalPokemons = fetch(apiUrl.length); // Aqui ele está retornando o valor 41
+        // console.log("Total de Pokemons encontrado: ", totalPokemons); // Aqui ele está retornando o valor 41
+        fetch("https://pokeapi.co/api/v2/pokemon?limit=" + quantidade)
+          .then((response) => response.json())
+          .then((allpokemon) => {
+            var pokedex = [];
+            const promises = allpokemon.results.map((val) =>
+              fetch(val.url).then((response) => response.json())
+            );
+
+            return Promise.all(promises).then((pokemonData) => {
+              pokemonData.forEach((pokemonSingle, index) => {
+                const val = allpokemon.results[index];
+                if (pokemonSingle.types.length > 1) {
+                  pokedex.push({
+                    nome: val.name,
+                    img: pokemonSingle.sprites.front_default,
+                    id: pokemonSingle.id,
+                    type1: pokemonSingle.types[0].type.name,
+                    type2: pokemonSingle.types[1].type.name,
+                  });
+                } else {
+                  pokedex.push({
+                    nome: val.name,
+                    img: pokemonSingle.sprites.front_default,
+                    id: pokemonSingle.id,
+                    type1: pokemonSingle.types[0].type.name,
+                  });
+                }
+              });
+
+              if (pokedex.length === quantidade) {
+                return new Promise((resolve) => {
+                  var pokemonBoxes = document.querySelector(".pokemon-boxes");
+                  console.log(pokemonBoxes); // Aqui ele está retornando o elemento div com a classe pokemon-boxes
+                  console.log(pokedex); // Aqui ele está retornando o array de objetos com os pokemons
+                  //   pokemonBoxes.innerHTML = "";
+                  if (pokemonBoxes) {
+                    pokemonBoxes.innerHTML = "";
+                  }
+
+                  pokedex.forEach((val) => {
+                    if (val.type2 === undefined) {
+                      pokemonBoxes.innerHTML += `
+                      <div class="pokemon-box">
+                        <h2>${val.nome} #<span class="pokemon-id">${val.id}</span></h2>
+                        <img src="${val.img}" alt="${val.nome}">
+                        <p>Type: <span>${val.type1}</span></p>
+                      </div>
+                    `;
+                    } else {
+                      pokemonBoxes.innerHTML += `
+                      <div class="pokemon-box">
+                        <h2>${val.nome} #<span class="pokemon-id">${val.id}</span></h2>
+                        <img src="${val.img}" alt="">
+                        <p>Type: <span>${val.type1}, ${val.type2}</span></p>
+                      </div>
+                    `;
+                    }
+                  });
+
+                  resolve(pokedex);
+                });
+              }
+            });
+          });
+      }
+
+      const form = document.getElementById("form");
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const inputValue = document.getElementById("quantidade").value;
+        const quantidade = parseInt(inputValue, 10); // Converte o valor para número
+        console.log("Quantidade de Pokemons:", quantidade); // Aqui ele está retornando a quantidade de pokemons
+        console.log("Tipo do Quantidade:", typeof quantidade); // Aqui ele está retornando o tipo do quantidade
+        console.log("Input Value:", inputValue); // Aqui ele está retornando o valor do input
+        console.log("Tipo do Input Value:", typeof inputValue); // Aqui ele está retornando o tipo do input
+        
+        // pegaPokemon(inputValue); // Aqui ele está retornando o valor do input (mas é uma string)
+        pegaPokemon(quantidade); // 
+      });
+
+    //   pegaPokemon(21);
+
+      
+      
+      
+      const apiUrl = "https://pokeapi.co/api/v2/pokemon";
+
+      // Função para buscar o valor "count" da API
+      let quantidadeTotal = async function fetchPokemonCount() {
+        try {
+          const response = await fetch(apiUrl);
+          console.log("Resposta da Chamada a API", response);
+          const data = await response.json();
+          console.log("JSON...", data);
+          const count = data.count; // Acessa o valor "count" na resposta JSON
+          console.log("Quantidade de Pokemon:", count);
+          document.getElementById(
+            "quantidade"
+          ).textContent = `Quantidade de Pokémons: ${count}`;
+        } catch (error) {
+          console.error("Erro ao buscar dados da API:", error);
+        }
+      }
+
+      // Chama a função para buscar o valor "count"
+      console.log(quantidadeTotal());
+    //   console.log(quantidadeTotal)
+    //   fetchPokemonCount();
+    //   pegaQuantidadePokemon();
+    </script>
+  </body>
+</html>

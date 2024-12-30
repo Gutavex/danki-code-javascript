@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokedex Duvidas</title>
+    <link rel="stylesheet" href="pokedex.css" />
+  </head>
+  <body>
+    <form id="form">
+      <input
+        id="quantidade"
+        type="number"
+        name="quantidade"
+        placeholder="Insira a quantidadede de pokemons"
+      />
+      <button type="submit" value="Submit">Enviar</button>
+      <div>
+        <div class="pokemon-boxes">
+          <!-- <div id="quantidade"></div> -->
+        </div>
+      </div>
+    </form>
+    <script>
+      function pegaPokemon(quantidade) {
+        // Precisa testar aqui ou no envio. Dependendo do que você quer fazer (e das boas práticas).
+        console.log("Quantidade:", quantidade);
+        console.log("Tipo do Parâmetro:", typeof quantidade);
+        let totalPokemons = parseInt(quantidade, 10); // Aqui ele está retornando o valor 41
+        console.log("totalPokemons:", totalPokemons);
+        console.log("Tipo do totalPokemons:", typeof totalPokemons);
+
+        // Testar se não está vazia por exemplo:
+        // if (quantidade === "") {
+        //   console.log("Digite um valor... Não dá pra buscar nenhum pokemón!");
+        //   // return;
+        // }
+
+        fetch("https://pokeapi.co/api/v2/pokemon?limit=" + totalPokemons)
+          .then((response) => response.json())
+          .then((allpokemon) => {
+            var pokedex = [];
+            const promises = allpokemon.results.map((val) =>
+              fetch(val.url).then((response) => response.json())
+            );
+
+            return Promise.all(promises).then((pokemonData) => {
+              pokemonData.forEach((pokemonSingle, index) => {
+                const val = allpokemon.results[index];
+                if (pokemonSingle.types.length > 1) {
+                  pokedex.push({
+                    nome: val.name,
+                    img: pokemonSingle.sprites.front_default,
+                    id: pokemonSingle.id,
+                    type1: pokemonSingle.types[0].type.name,
+                    type2: pokemonSingle.types[1].type.name,
+                  });
+                } else {
+                  pokedex.push({
+                    nome: val.name,
+                    img: pokemonSingle.sprites.front_default,
+                    id: pokemonSingle.id,
+                    type1: pokemonSingle.types[0].type.name,
+                  });
+                }
+              });
+
+              if (pokedex.length === totalPokemons) {
+                return new Promise((resolve) => {
+                  var pokemonBoxes = document.querySelector(".pokemon-boxes");
+                  pokemonBoxes.innerHTML = "";
+                  // if (pokemonBoxes) {
+                  //   pokemonBoxes.innerHTML = "";
+                  // }
+
+                  pokedex.forEach((val) => {
+                    if (val.type2 === undefined) {
+                      pokemonBoxes.innerHTML += `
+                      <div class="pokemon-box">
+                        <h2>${val.nome} #<span class="pokemon-id">${val.id}</span></h2>
+                        <img src="${val.img}" alt="${val.nome}">
+                        <p>Type: <span>${val.type1}</span></p>
+                      </div>
+                    `;
+                    } else {
+                      pokemonBoxes.innerHTML += `
+                      <div class="pokemon-box">
+                        <h2>${val.nome} #<span class="pokemon-id">${val.id}</span></h2>
+                        <img src="${val.img}" alt="">
+                        <p>Type: <span>${val.type1}, ${val.type2}</span></p>
+                      </div>
+                    `;
+                    }
+                  });
+
+                  resolve(pokedex);
+                });
+              }
+            });
+          });
+      }
+
+      const form = document.getElementById("form");
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const inputValue = document.getElementById("quantidade").value;
+        // const quantidade = parseInt(inputValue, 10);
+        console.log("Tudo começa aqui... no tipo da variável que vc tem ao pegar o value do elemento...", typeof inputValue);
+
+        // Testar se não está vazia por exemplo:
+        // if (inputValue === "" || inputValue === null || inputValue === undefined || inputValue <= 0) {
+        //   console.log("Digite um valor... Não dá pra buscar nenhum pokemón!");          
+        // }
+        
+        // if (!isNaN(inputValue)) {
+        //   console.log("Digite um valor numérico... Não dá pra buscar nenhum pokemón!");
+          
+        // }
+        // console.log(inputValue);
+        // console.log(inputValue);
+        pegaPokemon(inputValue);
+      });
+      
+      // Olha o que acontece quando voce passa uma string.
+      // pegaPokemon("3"); // Testando a função com 3 pokemons (passando uma string)
+    </script>
+  </body>
+</html>

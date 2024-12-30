@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AJAX Example</title>
+    <script>
+      function loadData() {
+        const xhr = new XMLHttpRequest();
+        const url = "danki-code-javascript/modulo-06-ajax/data.json"; // 'https://api.chucknorris.io/jokes/random';
+        const url3 = "data.json"; // 'https://api.chucknorris.io/jokes/random';
+        const url2 = "https://api.chucknorris.io/jokes/random"; // 'https://api.chucknorris.io/jokes/random';
+        xhr.open("GET", url3, true);
+        xhr.onload = function () {
+          if (this.status === 200) {
+            const data = JSON.parse(this.responseText);
+            // document.getElementById('output').innerHTML = data.message; // data.value.joke;
+            // document.getElementById('output').innerHTML = data.value; // Para usar com a API do Chuck Norris (pois value so existe no contexto dessa API)
+
+            // Exibindo todos os dados do arquivo JSON
+            let output = "";
+
+            // Iterar sobre o array de usuários e construir a string HTML
+            data.users.forEach((user) => {
+              output += `
+                            <div>
+                                <p>Nome: ${user.id}</p>
+                                <p>Nome: ${user.name}</p>
+                                <p>Idade: ${user.age}</p>
+                                <p>Email: ${user.email}</p>
+                            </div>
+                            <hr>    ''
+                        `;
+            });
+            document.getElementById("output").innerHTML = output; // Para exibir algo, preciso acessar o array de users (pois tenho que entender a estrutura do arquivo JSON)
+
+            // Exibindo o icone do Chuck Norris
+            // document.getElementById('icon').innerHTML = `<img src="${data.icon_url}" alt="Chuck Norris Icon">`;
+            console.log(`Icon URL: ${data.icon_url}`);
+            // console.log(data.icon_url)
+
+            console.log(this.status);
+            // console.log(this.statusText) // OK
+            // console.log(this.responseText) // {"message": "Hello World"}
+            // console.log("Arquivo JSON", data)
+
+            // console.log(data.message)
+          } else {
+            console.log(this.status);
+          }
+        };
+        xhr.send();
+
+        let limite = 3;
+        let pokemons = fetch(
+          `https://pokeapi.co/api/v2/pokemon?limit=${limite}`
+        )
+          .then((response) => response.json())
+          .then((data) => console.log(data))
+          .catch((error) => console.log(error));
+        console.log(pokemons);
+      }
+    </script>
+  </head>
+  <body>
+    <button onclick="loadData()">Load Data</button>
+    <div id="icon"></div>
+    <div id="output"></div>
+  </body>
+</html>
