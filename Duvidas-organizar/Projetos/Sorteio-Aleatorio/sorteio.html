@@ -346,10 +346,18 @@
         if (reset) {
           participants = [];
           idCounter = 1;
+          // habilitar campo de adicioar nome e botão adicionar participante
+          document.getElementById("name").removeAttribute("disabled");
+          document.querySelector("button[onclick='addPerson()']").removeAttribute("disabled");
+
           updateParticipantsTable();
         }
-        const resultDiv = document.getElementById("result");
-        resultDiv.style.display = "none";
+        
+
+        // const resultDiv = document.getElementById("result"); 
+        // resultDiv.style.display = "none";
+        
+        document.getElementById("result").style.display = "none";
 
         // Desabilitar o botão de "reiniciar sorteio"
         document.querySelector("button[onclick='resetDraw()']").setAttribute("hidden", "true");
