@@ -1,0 +1,190 @@
+/* ÍCONES */
+/* https://www.flaticon.com/packs/online-shopping-313 */
+
+.editing {
+  background-color: #f8d7da;
+  transition: background-color 0.3s ease;
+}
+.saved {
+  background-color: #d4edda;
+  transition: background-color 2s ease;
+}
+.highlighted {
+  background-color: #d3d3d3;
+  transition: background-color 2s ease;
+}
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+.form-group button,
+.participants button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.form-group button:hover {
+  background-color: #0056b3;
+}
+.participants {
+  margin-top: 40px;
+}
+.participants table {
+  width: 100%;
+  border-collapse: collapse;
+  transition: all 2s ease;
+  margin-bottom: 10px;
+}
+.participants th,
+.participants td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+.participants th {
+  background-color: #f2f2f2;
+}
+.participants tr:hover {
+  background-color: #f1f1f1;
+}
+.result {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #d4edda;
+  color: #155724;
+  display: none;
+}
+.result p {
+  margin: 0;
+}
+.remove-btn-old {
+  /* background-color: #dc3545; */
+  /* color: white; */
+  /* border: none; */
+  /* cursor: pointer; */
+  /* padding: 5px 10px; */
+
+  background: url("images/delete1.png") no-repeat center center;
+  background-size: contain;
+  /* width: 24px;
+  height: 24px;
+  border: none;
+  cursor: pointer;
+  display: inline-block; */
+  /*padding: 0;  /*Remove padding */
+  /*margin: 0; /* Remove margin */
+  /*background-color: transparent; /* Remove background color */
+  /*color: transparent;  Remove text color */
+  /* text-indent: -9999px; Move text out of view */
+}
+.remove-btn:hover {
+    background-color: #c82333;
+  }
+.icone-save:hover {
+    background-color: #40c94c;
+  }
+#noParticipantsMessage td {
+  padding: 10px 7px;
+}
+.no-participants td {
+  padding: 10px 7px;
+}
+
+.total-participates th,
+.total-participates td {
+  padding: 10px 7px;
+  font-weight: bold;
+}
+
+.totalParticipates td {
+  padding: 10px 7px;
+  font-weight: bold;
+}
+
+#noTotalParticipatesMessage td {
+  font-weight: bold;
+}
+
+.icone-edit:hover {
+    background-color: coral;
+}
+
+#sortear-button:hover{
+    background-color: #0056b3;
+    
+}
+
+/* Testes */
+/* .icone-edit,
+.icone-save,
+.remove-btn {
+  width: 24px;
+  height: 24px;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+
+
+.icone-save {
+  background: url("../images/check.png") no-repeat center center;
+  background-size: contain;
+}
+
+.remove-btn {
+  background: url("../images/cross.png") no-repeat center center;
+  background-size: contain;
+}
+
+.remove-btn:hover {
+  background-color: #c82333;
+} */
+
+.icone-edit-old {
+  background: url("images/pen.png") no-repeat center center;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+  background-color: transparent; /* Remove background color */
+  color: transparent; /* Remove text color */
+  text-indent: -9999px; /* Move text out of view */
+}
+
+.icone-save-old {
+  background: url("images/pen.png") no-repeat center center;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+  background-color: transparent; /* Remove background color */
+  color: transparent; /* Remove text color */
+  text-indent: -9999px; /* Move text out of view */
+}

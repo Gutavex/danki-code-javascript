@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Participantes</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .back-button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .back-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Participantes</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Votos</th>
+                <th>Chance de Sorteio (%)</th>
+            </tr>
+        </thead>
+        <tbody id="participants-list">
+            <!-- Participantes serão adicionados aqui -->
+        </tbody>
+    </table>
+    <a href="sorteio.html" class="back-button">Voltar para Sorteio</a>
+
+    <script>
+        const participants = [
+            { name: 'Participante 1', votes: 2 },
+            { name: 'Participante 2', votes: 1 },
+            { name: 'Participante 3', votes: 0 }
+        ];
+
+        function calculateChance(votes, totalParticipants) {
+            const baseChance = 100 / totalParticipants;
+            const maxVotes = totalParticipants - 1;
+            const additionalChance = Math.min((votes / maxVotes) * 20, 20);
+            return baseChance + additionalChance;
+        }
+
+        function renderParticipants() {
+            const participantsList = document.getElementById('participants-list');
+            participantsList.innerHTML = '';
+
+            participants.forEach(participant => {
+                const row = document.createElement('tr');
+
+                const nameCell = document.createElement('td');
+                nameCell.textContent = participant.name;
+                row.appendChild(nameCell);
+
+                const votesCell = document.createElement('td');
+                for (let i = 0; i < participant.votes; i++) {
+                    const checkIcon = document.createElement('span');
+                    checkIcon.textContent = '✔';
+                    votesCell.appendChild(checkIcon);
+                }
+                row.appendChild(votesCell);
+
+                const chanceCell = document.createElement('td');
+                const chance = calculateChance(participant.votes, participants.length);
+                chanceCell.textContent = chance.toFixed(2) + '%';
+                row.appendChild(chanceCell);
+
+                participantsList.appendChild(row);
+            });
+        }
+
+        renderParticipants();
+    </script>
+</body>
+</html>

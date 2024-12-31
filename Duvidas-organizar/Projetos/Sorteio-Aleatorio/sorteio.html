@@ -4,100 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sorteio Aleatório</title>
-    <style>
-    .editing {
-      background-color: #f8d7da;
-      transition: background-color 0.3s ease;
-    }
-    .saved {
-      background-color: #d4edda;
-      transition: background-color 2s ease;
-    }
-    .highlighted {
-      background-color: #d3d3d3;
-      transition: background-color 2s ease;
-    }
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .form-group {
-      margin-bottom: 15px;
-    }
-    .form-group label {
-      display: block;
-      margin-bottom: 5px;
-    }
-    .form-group input {
-      width: 100%;
-      padding: 8px;
-      box-sizing: border-box;
-    }
-    .form-group button,
-    .participants button {
-      padding: 10px 20px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    .form-group button:hover {
-      background-color: #0056b3;
-    }
-    .participants {
-      margin-top: 40px;
-    }
-    .participants table {
-      width: 100%;
-      border-collapse: collapse;
-      transition: all 2s ease;
-      margin-bottom: 10px;
-    }
-    .participants th,
-    .participants td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: left;
-    }
-    .participants th {
-      background-color: #f2f2f2;
-    }
-    .participants tr:hover {
-      background-color: #f1f1f1;
-    }
-    .result {
-      margin-top: 20px;
-      padding: 20px;
-      background-color: #d4edda;
-      color: #155724;
-      display: none;
-    }
-    .result p {
-      margin: 0;
-    }
-    .remove-btn {
-      background-color: #dc3545;
-      color: white;
-      border: none;
-      cursor: pointer;
-      padding: 5px 10px;
-    }
-    .remove-btn:hover {
-      background-color: #c82333;
-    }
-    #noParticipantsMessage td {
-      padding: 10px 7px;
-    }
-    .no-participants td {
-      padding: 10px 7px;
-    }
-
-
-    </style>
+    <!-- <a href="https://www.flaticon.com/free-icons/write" title="write icons"
+      >Write icons created by riajulislam - Flaticon</a
+    > -->
+    <link rel="stylesheet" href="css/sorteio.css" />
   </head>
   <body>
     <div class="container">
@@ -112,17 +22,23 @@
       <!-- <div class="form-group">
             <button onclick="generateDraw()">Gerar Sorteio</button>
         </div> -->
-        <div class="result" id="result">
-          <p>Parabéns, o sorteado foi <span id="winnerName"></span></p>
-          <p>Porcentagem de votos: <span id="winnerVotes"></span>%</p>
-          <p>
-            Probabilidade de ser sorteado: <span id="winnerProbability"></span>%
-          </p>
-        </div>
+      <div class="result" id="result">
+        <p>Parabéns, o sorteado foi <span id="winnerName"></span></p>
+        <p>Porcentagem de votos: <span id="winnerVotes"></span>%</p>
+        <p>
+          Probabilidade de ser sorteado: <span id="winnerProbability"></span>%
+        </p>
+      </div>
       <div class="participants">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <h2>Participantes</h2>
-          <button onclick="draw()">Sortear</button>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <h2 id="numero-participantes">Participantes</h2>
+          <button id="sortear-button" onclick="draw()">Sortear</button>
         </div>
         <table id="participantsTable">
           <thead>
@@ -138,7 +54,13 @@
           </thead>
           <tbody></tbody>
         </table>
-        
+        <div id="totalParticipates" class="total-participates" hidden="true">
+          <!-- <tr id="noTotalParticipatesMessage">
+          <td colspan="7" style="text-align: center">
+            Participantes: 0
+          </td>
+        </tr> -->
+        </div>
       </div>
       <div class="no-participants" id="noParticipantsMessage">
         <tr id="noParticipantsMessage">
@@ -174,7 +96,7 @@
         // Correção do ID: precisava verificar se o ID já existia no array de participantes
         // Então foi criado um array com os IDs removidos e o novo ID é o menor número que não está no array
         // Logo a falta de um ID não vai pular um número
-        const removedIds = participants.map(p => p.id).sort((a, b) => a - b);
+        const removedIds = participants.map((p) => p.id).sort((a, b) => a - b);
         let newId = idCounter;
         for (let i = 1; i < idCounter; i++) {
           if (!removedIds.includes(i)) {
@@ -189,6 +111,12 @@
         // limpar campo de nome
         document.getElementById("name").value = "";
 
+        // Exibir e Atualizar contador de Participantes
+        document.getElementById("totalParticipates").removeAttribute("hidden");
+        document.getElementById("numero-participantes").innerHTML = `          
+          Participantes ${participants.length}             
+        `;
+
         updateParticipantsTable();
       }
 
@@ -196,7 +124,7 @@
         const tbody = document
           .getElementById("participantsTable")
           .querySelector("tbody");
-        tbody.innerHTML = "";        
+        tbody.innerHTML = "";
 
         participants.forEach((person) => {
           const row = document.createElement("tr");
@@ -209,18 +137,21 @@
                 <td contenteditable="false">${
                   person.votes !== null ? person.votes : "N/A"
                 }</td>
-                <td>
-                <button onclick="editPerson(this)">Editar</button>
-                <button onclick="savePerson(this)" style="display:none;">Salvar</button>
-                <button class="remove-btn" onclick="removePerson(${
-                  person.id
-                })">Remover</button>
-                </td>
+                  <td>
+              <button class="icone-edit" onclick="editPerson(this)">Editar</button>
+              <button class="icone-save" onclick="savePerson(this)" style="display:none;">Salvar</button>
+              <button class="remove-btn" onclick="removePerson(${
+                person.id
+              })">Remover</button>
+              </td>
             `;
+
           tbody.appendChild(row);
         });
 
-        const noParticipantsMessage = document.getElementById("noParticipantsMessage");
+        const noParticipantsMessage = document.getElementById(
+          "noParticipantsMessage"
+        );
         if (participants.length === 0) {
           noParticipantsMessage.style.display = "block";
         } else {
@@ -286,7 +217,7 @@
 
         // Adicionar o vencedor ao array de vencedores
         if (!window.winners) {
-            window.winners = [];
+          window.winners = [];
         }
         window.winners.push(winner);
         console.log(window.winners);
@@ -310,7 +241,9 @@
         resultDiv.style.display = "block";
 
         // Habilitar o botão de "reiniciar sorteio"
-        document.querySelector("button[onclick='resetDraw()']").removeAttribute("hidden");
+        document
+          .querySelector("button[onclick='resetDraw()']")
+          .removeAttribute("hidden");
 
         // Destacar o vencedor
         const rows = document.querySelectorAll("#participantsTable tbody tr");
@@ -324,19 +257,23 @@
 
         // Desabilitar a edição dos participantes
         participants.forEach((person) => {
-            const row = document.querySelector(`#participantsTable tbody tr:nth-child(${person.id})`);
-            if (row) {
-                row.classList.add("highlighted");
-                const cells = row.querySelectorAll("td");
-                for (let i = 1; i < cells.length - 1; i++) {
-                    cells[i].setAttribute("contenteditable", "false");
-                }
+          const row = document.querySelector(
+            `#participantsTable tbody tr:nth-child(${person.id})`
+          );
+          if (row) {
+            row.classList.add("highlighted");
+            const cells = row.querySelectorAll("td");
+            for (let i = 1; i < cells.length - 1; i++) {
+              cells[i].setAttribute("contenteditable", "false");
             }
+          }
         });
-        
-        // desabilitar campo nome e botão adicionar participante 
+
+        // desabilitar campo nome e botão adicionar participante
         document.getElementById("name").setAttribute("disabled", "true");
-        document.querySelector("button[onclick='addPerson()']").setAttribute("disabled", "true");
+        document
+          .querySelector("button[onclick='addPerson()']")
+          .setAttribute("disabled", "true");
       }
 
       function resetDraw() {
@@ -348,19 +285,22 @@
           idCounter = 1;
           // habilitar campo de adicioar nome e botão adicionar participante
           document.getElementById("name").removeAttribute("disabled");
-          document.querySelector("button[onclick='addPerson()']").removeAttribute("disabled");
+          document
+            .querySelector("button[onclick='addPerson()']")
+            .removeAttribute("disabled");
 
           updateParticipantsTable();
         }
-        
 
-        // const resultDiv = document.getElementById("result"); 
+        // const resultDiv = document.getElementById("result");
         // resultDiv.style.display = "none";
-        
+
         document.getElementById("result").style.display = "none";
 
         // Desabilitar o botão de "reiniciar sorteio"
-        document.querySelector("button[onclick='resetDraw()']").setAttribute("hidden", "true");
+        document
+          .querySelector("button[onclick='resetDraw()']")
+          .setAttribute("hidden", "true");
       }
     </script>
   </body>
