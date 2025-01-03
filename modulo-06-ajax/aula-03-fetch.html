@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AJAX - Requisição Fectch</title>
+  </head>
+  <body>
+    <!-- Requisição Fetch - Conceitos -->
+    <h1>Requisição Fetch - Conceitos</h1>
+    <p>
+      Para fazer uma requisição com Fetch, basta chamar a função fetch() e
+      passar a URL da API que deseja consumir. O Fetch retorna uma Promise, que
+      pode ser resolvida com o método then().
+    </p>
+    <p>
+      Para acessar os dados da requisição, é necessário chamar o método json()
+      no objeto retornado pelo método then().
+    </p>
+    <p>Veja o exemplo abaixo:</p>
+    <pre>
+        <code>
+            fetch('https://jsonplaceholder.typicode.com/todos/1')
+                .then(response => response.json())
+                .then(data => console.log(data));
+        </code>
+    </pre>
+    <h2>Resultado:</h2>
+    <div id="outputMsg"></div>
+    <script>
+      // Requisição Fetch - básico (GET)
+      fetch("https://jsonplaceholder.typicode.com/todos/4")
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          var output = `
+                    <h3>${data.title}</h3>
+                    <p>Completed: ${data.completed}</p>
+                `;
+          document.getElementById("outputMsg").innerHTML = output;
+          console.log(data);
+        });
+      console.log("Teste");
+
+      // Requisição Fetch - POST (utilizado para cadastro de dados)
+        fetch("https://jsonplaceholder.typicode.com/posts", {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+            title: "Hakam Studio Inc.",
+            body: "Portfólio de Projetos",
+            userId: 1,
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Filmes - AJAX Exercise</title>
+  </head>
+  <body>
+    <div class="container"></div>
+    <!-- <div class="titulos">
+        <h2 class="titulo-filme"></h2>
+        <p class="description"></p>
+
+    </div> -->
+
+    <script>
+      //   import { PUBLIC_KEY } from "./config.js";
+      const PUBLIC_KEY = "506fadb0256c13349acc05dabebf9604";
+      //   const { publicKey } = require("./config");
+      //   console.log(PUBLIC_KEY);
+      var respostaFetch = fetch(
+        "https://api.themoviedb.org/3/movie/popular?api_key=506fadb0256c13349acc05dabebf9604&language=en-US&page=1"
+      );
+      // console.log(respostaFetch);
+      // API para buscar filmes em um catálogo
+      fetch(
+        `https://api.themoviedb.org/3/movie/popular?api_key=${PUBLIC_KEY}&language=en-US&page=1`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((response) => response.json())
+        .then(function (json) {
+          var container = document.querySelector(".container");
+
+          json.results.map(function (movie) {
+            container.innerHTML += `
+                        <div class="titulo-filme" style="cursor: pointer">
+                            <h2>${movie.title}</h2>
+                            <!-- <h3>${movie.title} (Or.: ${movie.original_title})</h3> -->
+                            <div class="description" style="display: none">                        
+                                <h4>Nota: ${movie.vote_average}</h4>
+                                <p>${movie.overview}</p>
+                                <!-- -->                                    
+                                <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">                                    
+                            </div>
+                        </div>`;
+          });
+          //   console.log("Resultado:", json); // Exibe no console do navegador o objeto json com os filmes retornados pela API (Geral)
+
+          // Não tem como clicar na div "description" para exibir ou ocultar o conteúdo dela (não funciona)
+          //   a div está oculta (display: none) e não é possível clicar nela para exibir o conteúdo
+          //   o código abaixo não funciona
+          var description = document.querySelectorAll(".description");
+          //   var titulos = document.querySelectorAll(".description");
+          //   console.log(typeof description); //
+          //   console.log(description[0]); //
+
+          for (var i = 0; i < description.length; i++) {
+            // console.log("Elemento", description[i]);
+            description[i].addEventListener("click", function () {
+              if (this.style.display === "none") {
+                this.style.display = "block";
+                console.log("Apareceu...");
+              } else {
+                this.style.display = "none";
+                console.log("Fechado...");
+              }
+            });
+            // console.log("i", description[i]);
+            // console.log(this)
+          }
+
+
+        //   Teste (aqui funciona)
+          var titulos = document.querySelectorAll(".titulo-filme");
+          for (var i = 0; i < titulos.length; i++) {
+            // console.log("Elemento", titulos[i]);
+            titulos[i].addEventListener("click", function () {
+              var description = this.querySelector(".description");
+              if (description.style.display === "none") {
+                description.style.display = "block";
+                console.log("Apareceu...");
+              } else {
+                description.style.display = "none";
+                console.log("Fechado...");
+              }
+            });
+            // console.log("i", titulos[i]);
+            // console.log(this)
+          }
+        });
+      // var titulos = document.querySelectorAll("titulos h2");
+    </script>
+  </body>
+</html>
