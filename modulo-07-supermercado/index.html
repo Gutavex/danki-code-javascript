@@ -1,46 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lista de Supermercado</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        header {
-            background-color: #5a71bb;
-            color: #fff;
-            text-align: center;
-            padding: 20px 0;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      header {
+        background-color: #5a71bb;
+        color: #fff;
+        text-align: center;
+        padding: 20px 0;
+      }
 
-        .lista-cadastro {
-            display: flex;
-            /* justify-content: center; */
-            margin: 20px 0;
-            padding: 0 20px;
-            
-        }
+      .lista-cadastro {
+        display: flex;
+        /* justify-content: center; */
+        margin: 20px 0;
+        padding: 0 20px;
+      }
 
-        .lista-cadastro input[type="text"] {
-            flex: 1;
-            /* display: flex; */
-            padding-left: 20px;
-            /* margin: 20px 0; */
-            height: 40px;
-        }
+      .lista-cadastro input[type="text"] {
+        flex: 1;
+        /* display: flex; */
+        padding-left: 20px;
+        /* margin: 20px 0; */
+        height: 40px;
+      }
 
-        /* .produtos-carrinho {
+      /* .produtos-carrinho {
             margin-top: 20px;
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
         } */
 
-        /* .produtos-carrinho div {
+      /* .produtos-carrinho div {
             background-color: #f9f9f9;
             padding: 10px;
             margin: 10px;
@@ -48,61 +47,78 @@
             box-shadow: 0 0 5px #ccc;
         } */
 
-        .produto-single {
-            /* display: flex; */
-            /* justify-content: space-between; */
-            padding: 10px 0;
-            margin: 20px 0;
-            background-color: #f9f9f9;
-            border-bottom: 1px solid #ccc;
-            /* border-radius: 5px; */
-            /* box-shadow: 0 0 5px #ccc; */
-        }
+      .produto-single {
+        /* display: flex; */
+        /* justify-content: space-between; */
+        padding: 10px 0;
+        margin: 20px 0;
+        background-color: #f9f9f9;
+        border-bottom: 1px solid #ccc;
+        /* border-radius: 5px; */
+        /* box-shadow: 0 0 5px #ccc; */
+      }
 
-        .produto-single h3 {
-            flex: 1;
-            padding: 0 20px;
-            /* font-size: 18px; */
-        }
+      .produto-single h3 {
+        flex: 1;
+        padding: 0 20px;
+        /* font-size: 18px; */
+      }
 
-        h3.price-produto {
-            /* color: #0f0; */
-            text-align: right;
-            font-size: 17px;
-            /* background-color: #0f0; */
-        }
+      h3.price-produto {
+        /* color: #0f0; */
+        text-align: right;
+        font-size: 17px;
+        /* background-color: #0f0; */
+      }
 
-        h3.price-produto > span {
-            background-color: #5a71bb;
-            padding: 8px 10px;
-            border-radius: 20px;
-            color: #fff;
-        }
+      h3.price-produto > span {
+        background-color: #5a71bb;
+        padding: 8px 10px;
+        border-radius: 20px;
+        color: #fff;
+      }
+
+      .soma-produto {
+        display: flex;
+        justify-content: flex-end;
+        padding: 20px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>APP Lista de Supermercado</header>
     <div class="lista-cadastro">
-        <input type="text" name="nome-produto" id="produto" placeholder="Nome do Produto">
-        <input type="text" name="valor-produto" id="valor" placeholder="Valor do Produto">
-        <input type="button" value="Adicionar" id="adicionar">
-        <hr>
-
-        
+      <input
+        type="text"
+        name="nome-produto"
+        id="produto"
+        placeholder="Nome do Produto"
+      />
+      <input
+        type="text"
+        name="valor-produto"
+        id="valor"
+        placeholder="Valor do Produto"
+      />
+      <input type="button" value="Adicionar" id="adicionar" />
+      <hr />
     </div>
     <div class="produtos-carrinho">
-        <div class="produto-single">
-            <h3>Red bull</h3>
-            <h3 class="price-produto"><span>R$ 15,00</span></h3>            
-        </div>
-        <div class="produto-single">
-            <h3>Monster</h3>
-            <h3 class="price-produto"><span>R$ 15,00</span></h3>
-        </div>
+      <div class="produto-single">
+        <h3>Red bull</h3>
+        <h3 class="price-produto"><span>R$ 15,00</span></h3>
+      </div>
+      <div class="produto-single">
+        <h3>Monster</h3>
+        <h3 class="price-produto"><span>R$ 15,00</span></h3>
+      </div>
+    </div>
+    <div class="soma-produto">
+      <h1>Total: R$ 100,00</h1>
     </div>
 
-    <script>
+    <script src="supermercado.js">
 
     </script>
-</body>
+  </body>
 </html>
