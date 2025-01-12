@@ -48,14 +48,14 @@
         } */
 
       .produto-single {
-        /* display: flex; */
+        display: flex;
         /* justify-content: space-between; */
         padding: 10px 0;
         margin: 20px 0;
         background-color: #f9f9f9;
         border-bottom: 1px solid #ccc;
         /* border-radius: 5px; */
-        /* box-shadow: 0 0 5px #ccc; */
+        box-shadow: 0 0 5px #ccc;
       }
 
       .produto-single h3 {
@@ -73,7 +73,8 @@
 
       h3.price-produto > span {
         background-color: #5a71bb;
-        padding: 8px 10px;
+        /* padding: 8px 8px 10px 8px; */
+        padding: 5px 10px;
         border-radius: 20px;
         color: #fff;
       }
@@ -82,6 +83,15 @@
         display: flex;
         justify-content: flex-end;
         padding: 20px;
+      }
+
+      .delete{
+        background-color: #f00;
+        color: #fff;
+        /* padding: 5px 10px; */
+        border-radius: 5px;
+        margin: auto;
+        cursor: pointer;
       }
     </style>
   </head>
@@ -114,9 +124,14 @@
         <h3>Monster</h3>
         <h3 class="price-produto"><span>R$ 15,00</span></h3>
       </div> -->
+      <!-- <div class="delete"><input type=button value="X" id="delete" name="delete" onclick="remover()" /> </div> -->
     </div>
     <div class="soma-produto">
-      <h1>Total: R$ 100,00</h1>
+      <h1>Total: R$ 0,00</h1>
+    </div>
+
+    <div class="limpar-lista">
+      <input type="button" value="Limpar" id="limpar" name="limpar"/>
     </div>
 
     <script src="supermercado.js">
