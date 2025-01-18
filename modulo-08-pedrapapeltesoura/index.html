@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pedra Papel ou Tesoura App</title>
+  </head>
+  <body>
+    <style>
+      .player-options img,
+      .enemy-options img {
+        max-width: 200px;
+        opacity: 0.2;
+        /* margin: 20px; */
+        /* display: inline-block; */
+        cursor: pointer;
+      }
+
+      .align {
+        display: flex;
+        justify-content: space-around;
+      }
+
+      .player-options img:hover,
+      .enemy-options img:hover {
+        opacity: 1;
+      }
+
+      .player-options h2,
+        .enemy-options h2 {
+            text-align: center;
+        }
+    </style>
+    <h1>Pedra, Papel ou Tesoura</h1>
+    <hr />
+    <div class="align">
+      <div class="player-options">
+        <h2>Player</h2>
+        <div><img src="rock.png" alt="Rock" /></div>
+        <div><img src="paper.png" alt="Paper" /></div>
+        <div><img src="scisor.png" alt="Scisor" /></div>
+      </div>
+      <div class="enemy-options">
+        <h2>Enemy</h2>
+        <div><img src="rock.png" alt="Rock" /></div>
+        <div><img src="paper.png" alt="Paper" /></div>
+        <div><img src="scisor.png" alt="Scisor" /></div>
+      </div>
+    </div>
+
+    <script>
+        const playerOptions = document.querySelectorAll('.player-options img');
+        const enemyOptions = document.querySelectorAll('.enemy-options img');
+        let playerScore = 0;
+        let enemyScore = 0;
+    
+        playerOptions.forEach((option) => {
+            option.addEventListener('click', () => {
+            const playerOption = option.alt;
+            const enemyOption = enemyOptions[Math.floor(Math.random() * 3)].alt;
+    
+            console.log("Player ------ ", "Enemy");
+            console.log(playerOption, enemyOption);
+            checkWinner(playerOption, enemyOption);
+            });
+        });
+
+        function checkWinner(playerOption, enemyOption) {
+            if (playerOption === enemyOption) {
+                console.log('Empate');
+            } else if (
+                (playerOption === 'Rock' && enemyOption === 'Scisor') ||
+                (playerOption === 'Paper' && enemyOption === 'Rock') ||
+                (playerOption === 'Scisor' && enemyOption === 'Paper')
+            ) {
+                playerScore++;
+                console.log('Player ganhou');
+            } else {
+                console.log('Enemy ganhou');
+                enemyScore++;
+            }
+            console.log(playerScore, enemyScore);
+        }
+
+        
+    </script>
+  </body>
+</html>
