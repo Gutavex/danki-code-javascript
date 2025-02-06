@@ -1,0 +1,135 @@
+form {
+  width: 500px;
+  height: 500px;
+  margin: 0 auto; /* Alinhando o formulário ao centro da tela */
+  display: flex; /* Flexbox: A propriedade Flex vai permitir que os elementos filhos do formulário sejam alinhados horizontalmente */
+  flex-direction: column; /* Flex-direction: A propriedade flex-direction define a direção dos "elementos flexíveis" (o que tem dentro do form). */
+  align-items: center; /* Align-items: A propriedade align-items define a alinhamento vertical dos "elementos flexíveis" (o que tem dentro do form). */
+}
+
+fieldset {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 20px;
+
+  /* border: 5px solid black; */
+  background-color: #ccc;
+  /* width: 100%; */
+  box-sizing: border-box; /* Inclui padding e border no cálculo da largura */
+}
+
+h2 {
+  text-align: center;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-weight: normal;
+}
+
+legend {
+  padding: 0 10px;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: black;
+}
+
+/* as classes containers com exemplo de que podemos aplicar o estilo em todos de uma única vez, porém podemos tratar cada input separadamente também */
+/* Não é a melhor prática */
+/* .container1,
+.container2,
+.container3 {
+    position: relative;
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+} */
+
+/* Melhor prática */
+/* Faço de maneira genérica direto na classe "formulario" que voce criou e não usou */
+.formulario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Aqui eu pego todas as divs do formulário (pois temos outros elementos também */
+.formulario div {
+  width: 100%; /* Mesma largura dos inputs e do botão */
+  margin-bottom: 20px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  /*justify-content: flex-start; /* Alterado para flex-start para alinhar com os inputs */
+}
+
+/* Estilos para os inputs */
+.formulario input {
+  width: 100%; /* Ocupa toda a largura do contêiner pai  */
+  /* Hierarquia: <form><fieldset><div><input> = Logo o "pai" do input é a "div" */
+  padding: 10px;
+  box-sizing: border-box; /* Inclui padding e border no cálculo da largura */
+}
+
+input[type="text"] {
+  color: black;
+  border: 2px solid black;
+  background-color: white;
+  border-radius: 5px;
+  width: 300px;
+  height: 30px;
+  padding: 0 1em;
+  outline: none;
+  margin-left: 30px;
+  margin-top: 12px;
+}
+
+/* Adicionei um botão na tela e, então, aproveitei para aplicar um estilo */
+button {
+  width: 300px; /* Mesmo tamanho dos inputs */
+  padding: 10px;
+  background-color: #333;
+  color: white;
+  border: 2px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 30px; /* Mesmo margin-left dos inputs */
+  margin-top: 12px; /* Mesmo margin-top dos inputs */
+}
+
+button:hover {
+  background-color: #555;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+label {
+  color: black;
+  padding: 0 5px;
+  position: absolute;
+  transform: translateY(50%);
+  left: 6em;
+  top: 10px;
+  /* pointer-events: none; */
+  transition: transform 0.3s ease,
+    color 0.3s ease;
+  background-color: transparent;
+}
+
+/* Muito mais simples fazer assim - Só buscar mais informações de como usar o "transform" do CSS */
+input:focus+label {
+  transform: translateY(-15px); /* Aqui eu movo o label para cima com base no quanto ele foi movido para baixo (top: 10px) */
+  /* Aqui voce pode brincar com o "scale" do transform e mudar o tamanho que fica a label. */
+  /* Voce pode mudar a cor do label quando entra no campo */
+}
+
+/* .formulario div:focus-within label {
+  transform: translateY(-50%) translateX(-1em);
+  font-size: 0.7rem;
+  background-color: #ccc;
+} */
